@@ -610,7 +610,24 @@
       padding: 1.1rem 1rem 1.2rem;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 10px;
+    }
+
+    .left-section {
+      background: var(--bg3);
+      border-radius: var(--r-lg);
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .left-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .09em;
+      color: var(--text3);
+      text-transform: uppercase;
     }
 
     /* ── MIDDLE column ── */
@@ -2573,6 +2590,209 @@
         padding: 1.4rem 1.6rem;
       }
     }
+
+    /* ════════════════════════════════════
+       SENTENCE HOVER HIGHLIGHT
+       ════════════════════════════════════ */
+    .article-text .article-para { transition: opacity 0.28s ease; }
+    .article-text .sentence { border-radius: 3px; transition: background 0.25s ease; padding: 1px 0; }
+    .article-text.highlight-active .article-para:not(.para-focus) { opacity: 0.38; }
+    .article-text.highlight-active .sentence-focus { background: var(--accent-bg); }
+
+    /* ════════════════════════════════════
+       SELECTION TOOLBAR
+       ════════════════════════════════════ */
+    .sel-toolbar {
+      position: fixed;
+      z-index: 2000;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-md);
+      padding: 4px 6px;
+      display: flex;
+      gap: 4px;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+    }
+    .sel-toolbar.show { opacity: 1; pointer-events: auto; }
+    .sel-btn {
+      background: var(--bg3);
+      border: none;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: background 0.15s;
+    }
+    .sel-btn:hover { background: var(--accent-bg); color: var(--accent2); }
+
+    /* ════════════════════════════════════
+       AI TUTOR PANEL
+       ════════════════════════════════════ */
+    .tutor-panel {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .tutor-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tutor-hdr-left { display: flex; align-items: center; gap: 8px; }
+    .tutor-icon { font-size: 14px; color: var(--accent); }
+    .tutor-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .tutor-close {
+      background: none; border: none; color: var(--text3); font-size: 14px;
+      cursor: pointer; padding: 2px 6px; border-radius: var(--r-sm); transition: color 0.15s;
+    }
+    .tutor-close:hover { color: var(--text); }
+    .tutor-context-box {
+      margin: 12px 18px 10px;
+      padding: 10px 14px;
+      background: var(--accent-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      font-size: 14px;
+      color: var(--text2);
+      font-family: var(--font-read);
+      line-height: 1.6;
+    }
+    .tutor-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 18px 10px;
+    }
+    .tutor-preset-btn {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: all 0.15s;
+    }
+    .tutor-preset-btn:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-bg); }
+    .tutor-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 0 18px 12px;
+    }
+    .tutor-input {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: var(--r-md);
+      font-family: var(--font-ui);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .tutor-input:focus { border-color: var(--accent); }
+    .tutor-send-btn {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent);
+      color: var(--accent2);
+      font-size: 15px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .tutor-send-btn:hover { background: var(--accent); color: #fff; }
+    .tutor-response {
+      padding: 0 18px 16px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 24px;
+      font-family: var(--font-ui);
+      white-space: pre-wrap;
+    }
+
+    /* ════════════════════════════════════
+       REWRITE PANEL
+       ════════════════════════════════════ */
+    .rewrite-panel {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .rewrite-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rewrite-original {
+      margin: 12px 18px 10px;
+      padding: 10px 14px;
+      background: var(--bg3);
+      border-radius: var(--r-md);
+      font-size: 14px;
+      color: var(--text2);
+      font-family: var(--font-read);
+      line-height: 1.6;
+    }
+    .rewrite-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 18px 12px;
+    }
+    .rewrite-opt-btn {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: all 0.15s;
+    }
+    .rewrite-opt-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .rewrite-opt-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent2); }
+    .rewrite-result {
+      margin: 0 18px 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .rewrite-result-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 8px;
+    }
+    .rewrite-result-text {
+      font-size: 15px;
+      font-family: var(--font-read);
+      color: var(--text);
+      line-height: 1.7;
+    }
   </style>
 </head>
 
@@ -2612,6 +2832,9 @@
       </div>
       <div class="col-body">
         <div class="aside-inner">
+
+          <div class="left-section">
+            <div class="left-section-title">阅读设置</div>
 
           <div class="field-group">
             <div class="field-label">学习语言</div>
@@ -2673,6 +2896,27 @@
           </div>
 
           <div class="field-group">
+            <div class="field-label">文章长度</div>
+            <div class="length-slider-wrap">
+              <div class="length-slider-top">
+                <span style="font-size:11px;color:var(--text3)">目标词数</span>
+                <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
+                  onchange="onLengthChange()" onblur="onLengthChange()">
+              </div>
+              <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
+                oninput="updateLengthLabel()">
+              <div class="length-range">
+                <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
+              </div>
+            </div>
+          </div>
+
+          </div><!-- end left-section 阅读设置 -->
+
+          <div class="left-section">
+            <div class="left-section-title">AI 风格</div>
+
+          <div class="field-group">
             <div class="field-label">文章风格</div>
             <div class="style-dropdown" id="styleDropdown">
               <div class="style-header" id="styleHeader" onclick="toggleStyleList()">
@@ -2715,22 +2959,6 @@
           </div>
 
           <div class="field-group">
-            <div class="field-label">文章长度</div>
-            <div class="length-slider-wrap">
-              <div class="length-slider-top">
-                <span style="font-size:11px;color:var(--text3)">目标词数</span>
-                <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
-                  onchange="onLengthChange()" onblur="onLengthChange()">
-              </div>
-              <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
-                oninput="updateLengthLabel()">
-              <div class="length-range">
-                <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="field-group">
             <div class="field-label">题目数量</div>
             <div class="quiz-count-row">
               <button class="quiz-count-btn" id="quizCountDec" onclick="changeQuizCount(-1)">−</button>
@@ -2745,6 +2973,8 @@
               <span id="quizWarnText"></span>
             </div>
           </div>
+
+          </div><!-- end left-section AI 风格 -->
 
         </div><!-- end aside-inner -->
       </div><!-- end col-body -->
@@ -2848,6 +3078,12 @@
 
   </div><!-- end three-col -->
 
+  <!-- Selection toolbar -->
+  <div class="sel-toolbar" id="selToolbar">
+    <button class="sel-btn" onclick="openTutor()">Ask AI</button>
+    <button class="sel-btn" onclick="openRewrite()">改写</button>
+  </div>
+
   <!-- Tooltip -->
   <div class="tooltip" id="tooltip">
     <div class="tt-word-row">
@@ -2906,6 +3142,8 @@
     let grammarData = null;
     let tooltipTimer = null;
     const tooltipCache = {};
+    let tutorContext = '';  // the selected sentence/text
+    let tutorAbort = null; // for cancelling ongoing tutor stream
 
     // ─── Length slider ───
     const WORDS_MIN = 100, WORDS_MAX = 800;
@@ -3226,7 +3464,9 @@
       </div>
     </div>
     <div id="quizSection"><div class="pending-placeholder">等待生成……</div></div>
-    <div id="grammarSection"><div class="pending-placeholder">等待生成……</div></div>`;
+    <div id="grammarSection"><div class="pending-placeholder">等待生成……</div></div>
+    <div class="tutor-panel" id="tutorPanel" style="display:none"></div>
+    <div class="rewrite-panel" id="rewritePanel" style="display:none"></div>`;
       switchView('article');
 
       try {
@@ -3443,7 +3683,17 @@
 
     // ─── Clickable words ───
     function makeWords(text, lang) {
-      return text.replace(/([^\s\p{P}]+)/gu, m => `<span class="word" data-word="${escA(m)}">${esc(m)}</span>`);
+      // Split into paragraphs on blank lines or single newlines
+      const paras = text.split(/\n+/).filter(p => p.trim());
+      return paras.map(para => {
+        // Split paragraph into sentences: break after . ! ? followed by space or end
+        const sentences = para.split(/(?<=[.!?。！？])\s+/);
+        const sentenceHTML = sentences.map(sent => {
+          const words = sent.replace(/([^\s\p{P}]+)/gu, m => `<span class="word" data-word="${escA(m)}">${esc(m)}</span>`);
+          return `<span class="sentence">${words} </span>`;
+        }).join('');
+        return `<p class="article-para">${sentenceHTML}</p>`;
+      }).join('');
     }
     function setupWordHover() { setupWordHoverIn($('articleText')); }
     function setupWordHoverIn(container) {
@@ -3452,10 +3702,28 @@
         const w = e.target.closest('.word'); if (!w) return;
         clearTimeout(tooltipTimer);
         tooltipTimer = setTimeout(() => showTip(w), 650);
+        // Sentence highlight
+        const sent = w.closest('.sentence');
+        const para = w.closest('.article-para');
+        container.classList.add('highlight-active');
+        container.querySelectorAll('.sentence').forEach(s => s.classList.remove('sentence-focus'));
+        container.querySelectorAll('.article-para').forEach(p => p.classList.remove('para-focus'));
+        if (sent) sent.classList.add('sentence-focus');
+        if (para) para.classList.add('para-focus');
       });
       container.addEventListener('mouseout', e => {
-        if (!e.target.closest('.word')) return;
-        clearTimeout(tooltipTimer); tooltipTimer = setTimeout(hideTip, 380);
+        const w = e.target.closest('.word');
+        if (!w) return;
+        clearTimeout(tooltipTimer);
+        tooltipTimer = setTimeout(hideTip, 380);
+        // Remove highlights after short delay for smoothness
+        setTimeout(() => {
+          if (!container.matches(':hover') || !container.querySelector('.word:hover')) {
+            container.classList.remove('highlight-active');
+            container.querySelectorAll('.sentence').forEach(s => s.classList.remove('sentence-focus'));
+            container.querySelectorAll('.article-para').forEach(p => p.classList.remove('para-focus'));
+          }
+        }, 120);
       });
     }
 
@@ -3644,7 +3912,9 @@
       </div>
     </div>
     <div id="quizSection"></div>
-    <div id="grammarSection"></div>`;
+    <div id="grammarSection"></div>
+    <div class="tutor-panel" id="tutorPanel" style="display:none"></div>
+    <div class="rewrite-panel" id="rewritePanel" style="display:none"></div>`;
       setupWordHover();
       if (h.grammarData) renderGrammar(h.grammarData, h.lang);
       if (h.quizData) { quizData = h.quizData; submitted = false; Object.keys(picked).forEach(k => delete picked[k]); renderQuiz(h.quizData); }
@@ -3706,9 +3976,6 @@
         }
       }
     }
-    // Apply focus mode on page load
-    document.addEventListener('DOMContentLoaded', () => setMode('focus'));
-
     // ─── Collapsible sections ───
     function toggleSection(bodyId, arrowId) {
       const body = document.getElementById(bodyId);
@@ -3847,6 +4114,157 @@
         if (card) card.classList.add('tc-active');
       }
     }
+
+    // ─── Selection toolbar ───
+    function setupSelectionToolbar() {
+      document.addEventListener('mouseup', handleSelection);
+    }
+
+    function handleSelection(e) {
+      if (e.target.closest('.sel-toolbar') || e.target.closest('.tutor-panel') || e.target.closest('.rewrite-panel')) return;
+      setTimeout(() => {
+        const sel = window.getSelection();
+        const text = sel ? sel.toString().trim() : '';
+        if (!text || !sel.rangeCount) { hideSelToolbar(); return; }
+        const range = sel.getRangeAt(0);
+        const articleEl = $('articleText') || document.querySelector('.article-text');
+        if (!articleEl || !articleEl.contains(range.commonAncestorContainer)) { hideSelToolbar(); return; }
+        tutorContext = text;
+        const rect = range.getBoundingClientRect();
+        const tb = $('selToolbar');
+        tb.style.top = (rect.top + window.scrollY - 44) + 'px';
+        tb.style.left = Math.min(rect.left + window.scrollX, window.innerWidth - 140) + 'px';
+        tb.classList.add('show');
+      }, 10);
+    }
+    function hideSelToolbar() {
+      const tb = $('selToolbar'); if (tb) tb.classList.remove('show');
+    }
+    document.addEventListener('mousedown', e => {
+      if (!e.target.closest('.sel-toolbar')) hideSelToolbar();
+    });
+
+    // ─── AI Tutor ───
+    function openTutor() {
+      hideSelToolbar();
+      const panel = $('tutorPanel');
+      if (!panel) return;
+      const lang = $('articleText')?.dataset.lang || $('targetLang').value;
+      const native = $('articleText')?.dataset.native || $('nativeLang').value;
+      panel.style.display = 'block';
+      panel.innerHTML = `
+        <div class="tutor-hdr">
+          <div class="tutor-hdr-left">
+            <span class="tutor-icon">✦</span>
+            <span class="tutor-title">AI 导师</span>
+          </div>
+          <button class="tutor-close" onclick="closeTutor()">✕</button>
+        </div>
+        <div class="tutor-context-box">${esc(tutorContext)}</div>
+        <div class="tutor-presets">
+          <button class="tutor-preset-btn" onclick="sendTutorQ('为什么这里用这个语法形式？')">为什么这个语法？</button>
+          <button class="tutor-preset-btn" onclick="sendTutorQ('这句话是什么语气/时态？')">时态/语气</button>
+          <button class="tutor-preset-btn" onclick="sendTutorQ('请解释这句话的结构')">句子结构</button>
+          <button class="tutor-preset-btn" onclick="sendTutorQ('母语者通常怎么表达这个意思？')">母语者说法</button>
+        </div>
+        <div class="tutor-input-row">
+          <input class="tutor-input" id="tutorInput" placeholder="问 AI 任何关于这句话的问题…"
+            onkeydown="if(event.key==='Enter')sendTutorQ()">
+          <button class="tutor-send-btn" onclick="sendTutorQ()">↑</button>
+        </div>
+        <div class="tutor-response" id="tutorResponse"></div>`;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function closeTutor() {
+      const p = $('tutorPanel'); if (p) p.style.display = 'none';
+    }
+
+    async function sendTutorQ(preset) {
+      if (!getKey()) { showError('请先输入 API Key'); return; }
+      const input = $('tutorInput');
+      const question = preset || (input ? input.value.trim() : '');
+      if (!question) return;
+      const resp = $('tutorResponse');
+      if (!resp) return;
+      if (input) input.value = '';
+      const lang = $('articleText')?.dataset.lang || $('targetLang').value;
+      const native = $('articleText')?.dataset.native || $('nativeLang').value;
+      resp.innerHTML = '<span class="streaming-indicator"></span>';
+      try {
+        const answer = await callAPI(
+          [{ role: 'user', content: `Context sentence from a ${lang} article (CEFR ${currentLevel}):\n"${tutorContext}"\n\nFull article:\n${articleContent.slice(0, 1200)}\n\nQuestion (answer in ${native}):\n${question}` }],
+          `You are an expert ${lang} language tutor. Give clear, concise explanations in ${native}. Focus on the specific question. Use examples when helpful.`,
+          true, (_, f) => { resp.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 800, false, 'AI导师'
+        );
+        resp.innerHTML = esc(answer).replace(/\n/g, '<br>');
+      } catch(e) { resp.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
+    }
+
+    // ─── Rewrite panel ───
+    function openRewrite() {
+      hideSelToolbar();
+      const panel = $('rewritePanel');
+      if (!panel) return;
+      const lang = $('articleText')?.dataset.lang || $('targetLang').value;
+      const options = [
+        { key: 'simpler', label: '更简单', desc: 'Simpler' },
+        { key: 'formal', label: '正式', desc: 'More Formal' },
+        { key: 'casual', label: '口语', desc: 'More Casual' },
+        { key: 'native', label: '母语者', desc: 'Native-like' },
+        { key: 'b1', label: 'B1 改写', desc: 'CEFR B1 level' },
+        { key: 'c1', label: 'C1 改写', desc: 'CEFR C1 level' },
+      ];
+      panel.style.display = 'block';
+      panel.innerHTML = `
+        <div class="rewrite-hdr">
+          <div class="tutor-hdr-left">
+            <span class="tutor-icon">⟳</span>
+            <span class="tutor-title">改写对比</span>
+          </div>
+          <button class="tutor-close" onclick="closeRewrite()">✕</button>
+        </div>
+        <div class="rewrite-original">${esc(tutorContext)}</div>
+        <div class="rewrite-options">
+          ${options.map(o => `<button class="rewrite-opt-btn" onclick="doRewrite('${o.key}','${o.desc}',this)">${o.label}</button>`).join('')}
+        </div>
+        <div class="rewrite-result" id="rewriteResult" style="display:none">
+          <div class="rewrite-result-label">改写结果</div>
+          <div class="rewrite-result-text" id="rewriteText"></div>
+        </div>`;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function closeRewrite() {
+      const p = $('rewritePanel'); if (p) p.style.display = 'none';
+    }
+
+    async function doRewrite(key, styleDesc, btn) {
+      if (!getKey()) { showError('请先输入 API Key'); return; }
+      const lang = $('articleText')?.dataset.lang || $('targetLang').value;
+      const resultBox = $('rewriteResult');
+      const textBox = $('rewriteText');
+      if (!resultBox || !textBox) return;
+      resultBox.style.display = 'block';
+      textBox.innerHTML = '<span class="streaming-indicator"></span>';
+      // highlight selected button
+      document.querySelectorAll('.rewrite-opt-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      try {
+        const result = await callAPI(
+          [{ role: 'user', content: `Rewrite the following ${lang} sentence in a "${styleDesc}" style. Output ONLY the rewritten sentence in ${lang}, nothing else:\n\n"${tutorContext}"` }],
+          `You are a ${lang} language expert. Rewrite sentences while preserving meaning. Output only the rewritten sentence.`,
+          true, (_, f) => { textBox.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 400, false, '改写'
+        );
+        textBox.innerHTML = esc(result);
+      } catch(e) { textBox.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
+    }
+
+    // Apply focus mode on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      setMode('focus');
+      setupSelectionToolbar();
+    });
   </script>
 
   <!-- Debug 面板 -->
