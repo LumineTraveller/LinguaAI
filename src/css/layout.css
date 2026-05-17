@@ -1,0 +1,238 @@
+/* ============================================================
+   LinguaAI · layout.css
+   Three-column layout, top bar, column collapse
+   ============================================================ */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  padding: 0 24px 16px;
+  /* top handled by .top-bar */
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Logo */
+.logo {
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  padding-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.logo span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ── Top bar ── */
+.top-bar {
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  gap: 16px;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* word-toggle in top bar: remove left border */
+.top-bar .word-toggle {
+  border-left: none;
+  padding-left: 0;
+}
+
+.three-col {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Generic column card ── */
+.col {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.col-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.col-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* ── LEFT column ── */
+.col-left {
+  flex: 1 0 0px;
+  min-width: 210px;
+  transition: min-width var(--transition), flex var(--transition), border-width var(--transition);
+}
+
+.col-left.collapsed {
+  flex: 0 0 36px !important;
+  min-width: 36px !important;
+}
+
+.col-collapse-btn {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text3);
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.col-collapse-btn:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.aside-inner {
+  padding: 1.1rem 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* ── MIDDLE column ── */
+.col-mid {
+  flex: 3.236 0 0px;
+  /* golden-ratio: mid ≈ 61.8 %, each side ≈ 19.1 % */
+  min-width: 0;
+  position: relative;
+}
+
+.mid-content {
+  padding: 1.5rem 2rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.mid-content>* {
+  width: 100%;
+  max-width: 1280px;
+}
+
+/* View switching */
+.mid-view-article #quizSection,
+.mid-view-article #grammarSection {
+  display: none;
+}
+
+.mid-view-quiz #articleCard,
+.mid-view-quiz #grammarSection {
+  display: none;
+}
+
+.mid-view-grammar #articleCard,
+.mid-view-grammar #quizSection {
+  display: none;
+}
+
+/* Floating generate button */
+.gen-fab {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+}
+
+/* ── RIGHT column ── */
+.col-right {
+  flex: 1 0 0px;
+  min-width: 190px;
+  transition: min-width var(--transition), flex var(--transition), border-width var(--transition);
+}
+
+.col-right.collapsed {
+  flex: 0 0 36px !important;
+  min-width: 36px !important;
+}
+
+/* Thin-strip state: hide body + label, center the toggle button */
+.col-left.collapsed .col-body,
+.col-right.collapsed .col-body {
+  display: none;
+}
+
+.col-left.collapsed .col-hdr,
+.col-right.collapsed .col-hdr {
+  justify-content: center;
+  border-bottom: none;
+  padding: 12px 7px;
+}
+
+.col-left.collapsed .col-hdr> :not(button),
+.col-right.collapsed .col-hdr> :not(button) {
+  display: none;
+}
+
+/* three-col needs position:relative for any absolute children */
+.three-col {
+  position: relative;
+}
+
+/* Main content container */
+#main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Welcome: center vertically in mid column */
+.welcome {
+  min-height: 55vh;
+}

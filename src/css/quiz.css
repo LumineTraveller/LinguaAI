@@ -1,0 +1,342 @@
+/* ============================================================
+   LinguaAI · quiz.css
+   Quiz cards, answer options, scoring UI,
+   grammar/vocab section styles
+   ============================================================ */
+
+/* ════════════════════════════════════
+   SECTION CARDS (grammar + quiz)
+   ════════════════════════════════════ */
+.section-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.section-card-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.section-card-header:hover {
+  background: var(--bg3);
+}
+
+.section-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.section-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  flex: 1;
+  color: var(--text);
+}
+
+.section-card-arrow {
+  font-size: 10px;
+  color: var(--text3);
+  transition: transform 0.22s;
+  margin-left: auto;
+}
+
+.section-card-arrow.open {
+  transform: rotate(180deg);
+}
+
+.section-card-body {
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  max-height: 4000px;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  opacity: 1;
+}
+
+.section-card-body.collapsed {
+  max-height: 0;
+  border-top: none;
+  opacity: 0;
+}
+
+/* Grammar */
+.grammar-icon {
+  background: var(--blue-bg);
+  color: var(--blue-c);
+}
+
+.grammar-body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.grammar-section {
+  padding: 1.5rem 1.8rem;
+}
+
+.grammar-section+.grammar-section {
+  border-top: 1px solid var(--border);
+}
+
+.gs-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 1rem;
+}
+
+.grammar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grammar-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 13px 16px;
+}
+
+.gi-term {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  margin-bottom: 4px;
+  letter-spacing: -0.005em;
+}
+
+.gi-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.gi-ex {
+  font-size: 15px;
+  color: var(--text3);
+  font-family: var(--font-read);
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* Vocab grid */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.vocab-item {
+  background: var(--bg);
+  border-radius: var(--r-md);
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.vocab-item:hover {
+  border-color: var(--border2);
+  transform: translateY(-1px);
+}
+
+.vocab-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.vocab-word {
+  font-size: 17px;
+  font-weight: 500;
+  font-family: var(--font-read);
+  color: var(--text);
+}
+
+.gender-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.gb-m {
+  background: var(--blue-bg);
+  color: var(--blue-c);
+}
+
+.gb-f {
+  background: var(--pink-bg);
+  color: var(--pink);
+}
+
+.gb-n {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.gb-hide {
+  display: none;
+}
+
+.vocab-pos {
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+}
+
+.vocab-def {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+
+/* ════════════════════════════════════
+   QUIZ
+   ════════════════════════════════════ */
+.quiz-card {
+  /* inherits section-card */
+}
+
+.quiz-card-inner {
+  padding: 1.5rem 1.8rem;
+}
+
+.quiz-sub {
+  font-size: 13px;
+  color: var(--text3);
+}
+
+.quiz-score {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--bg3);
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.question-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 1.1rem 1.4rem;
+}
+
+.question-text {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 11px;
+  line-height: 1.65;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.option-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  padding: 9px 13px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--accent-bg);
+}
+
+.option-btn.correct {
+  background: var(--green-bg);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.option-btn.wrong {
+  background: var(--red-bg);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+}
+
+.explanation {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 9px;
+  padding: 9px 12px;
+  background: var(--bg2);
+  border-left: 2px solid var(--accent);
+  border-radius: 5px;
+  line-height: 1.65;
+  display: none;
+}
+
+.explanation.show {
+  display: block;
+}
+
+.btn-submit {
+  margin-top: 0.75rem;
+  padding: 9px 22px;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-submit:hover {
+  background: var(--accent2);
+}
+
+#retryQ {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+
+#retryQ:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
