@@ -1,0 +1,3946 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinguaAI · 智能语言学习</title>
+  <style>
+    /* ============================================================
+       LinguaAI · Refined UI
+       Two themes (indigo / violet) × two modes (dark / light).
+       Calm neutral palettes, single accent, consistent radii.
+       ============================================================ */
+
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    /* ── Structural tokens ── */
+    :root {
+      --aside-w: 280px;
+      --header-h: 56px;
+      --transition: 0.22s ease;
+      --font-ui: 'DM Sans', 'Helvetica Neue', system-ui, sans-serif;
+      --font-read: 'Crimson Pro', 'Source Serif Pro', Georgia, serif;
+
+      --r-sm: 6px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 16px;
+
+      /* semantic status colors — theme-agnostic */
+      --green: #4ade80;
+      --green-bg: rgba(74, 222, 128, 0.10);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.10);
+      --teal: #5eead4;
+      --teal-bg: rgba(94, 234, 212, 0.10);
+      --pink: #f0a4b6;
+      --pink-bg: rgba(240, 164, 182, 0.10);
+      --blue-c: #7fb3e3;
+      --blue-bg: rgba(127, 179, 227, 0.10);
+    }
+
+    /* ══ DARK · INDIGO (default) ══ */
+    :root,
+    html.theme-blue {
+      --bg: #1a1c21;
+      --bg2: #22252b;
+      --bg3: #2a2d34;
+      --surface: #34373f;
+      --surface2: #40434c;
+      --border: rgba(255, 255, 255, 0.06);
+      --border2: rgba(255, 255, 255, 0.12);
+      --text: #e6e8ee;
+      --text2: #9097a8;
+      --text3: #5d6376;
+      --accent: #8a9cff;
+      --accent2: #aab8ff;
+      --accent-bg: rgba(138, 156, 255, 0.12);
+      --amber: #8a9cff;
+      --amber-bg: rgba(138, 156, 255, 0.10);
+      --blue: #7fb3e3;
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ══ LIGHT · INDIGO ══ */
+    html.light.theme-blue,
+    html.theme-blue.light {
+      --bg: #fafaf8;
+      --bg2: #ffffff;
+      --bg3: #f4f4f1;
+      --surface: #ececea;
+      --surface2: #dfdfdd;
+      --border: rgba(20, 22, 30, 0.08);
+      --border2: rgba(20, 22, 30, 0.16);
+      --text: #181a1f;
+      --text2: #5a6072;
+      --text3: #8e94a3;
+      --accent: #4c5fd8;
+      --accent2: #3a4dc4;
+      --accent-bg: rgba(76, 95, 216, 0.09);
+      --amber: #4c5fd8;
+      --amber-bg: rgba(76, 95, 216, 0.08);
+      --blue: #2563a8;
+      --shadow-md: 0 4px 14px rgba(20, 22, 30, 0.06);
+      --shadow-lg: 0 16px 42px rgba(20, 22, 30, 0.10);
+    }
+
+    /* ══ DARK · VIOLET ══ */
+    html.theme-purple {
+      --bg: #1a1c21;
+      --bg2: #22252b;
+      --bg3: #2a2d34;
+      --surface: #34373f;
+      --surface2: #40434c;
+      --border: rgba(255, 255, 255, 0.06);
+      --border2: rgba(255, 255, 255, 0.12);
+      --text: #ecebf0;
+      --text2: #9a93a8;
+      --text3: #615a73;
+      --accent: #b48dff;
+      --accent2: #c9aaff;
+      --accent-bg: rgba(180, 141, 255, 0.12);
+      --amber: #b48dff;
+      --amber-bg: rgba(180, 141, 255, 0.10);
+      --blue: #7fb3e3;
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ══ LIGHT · VIOLET ══ */
+    html.theme-purple.light {
+      --bg: #faf9fb;
+      --bg2: #ffffff;
+      --bg3: #f3f1f6;
+      --surface: #ebe9ef;
+      --surface2: #ddd9e4;
+      --border: rgba(20, 18, 30, 0.08);
+      --border2: rgba(20, 18, 30, 0.16);
+      --text: #1b181f;
+      --text2: #5c5670;
+      --text3: #8e88a0;
+      --accent: #7a4fd6;
+      --accent2: #643cc0;
+      --accent-bg: rgba(122, 79, 214, 0.09);
+      --amber: #7a4fd6;
+      --amber-bg: rgba(122, 79, 214, 0.08);
+      --blue: #2563a8;
+      --shadow-md: 0 4px 14px rgba(20, 18, 30, 0.06);
+      --shadow-lg: 0 16px 42px rgba(20, 18, 30, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-feature-settings: 'ss01', 'cv11';
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* ════════════════════════════════════
+       HEADER
+       ════════════════════════════════════ */
+    header {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      height: var(--header-h);
+      min-height: var(--header-h);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      flex-wrap: nowrap;
+    }
+
+    header>* {
+      flex-shrink: 0;
+    }
+
+    .header-right>* {
+      flex-shrink: 0;
+    }
+
+    .logo {
+      font-family: var(--font-ui);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.015em;
+      white-space: nowrap;
+      padding-right: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* generic small pill button used across the header */
+    .btn-hist {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 11px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: var(--transition);
+      height: 30px;
+    }
+
+    .btn-hist:hover {
+      border-color: var(--text2);
+      color: var(--text);
+      background: var(--bg3);
+    }
+
+    /* mode toggle (focus / study) */
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 3px;
+      gap: 2px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    .mode-btn {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0 12px;
+      height: 22px;
+      border: none;
+      background: none;
+      color: var(--text2);
+      cursor: pointer;
+      border-radius: 5px;
+      transition: var(--transition);
+      font-family: var(--font-ui);
+      white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+      color: var(--text);
+    }
+
+    .mode-btn.active {
+      background: var(--bg2);
+      color: var(--text);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .mode-btn.focus-active {
+      background: var(--accent-bg);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    /* hover-translate toggle */
+    .word-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      height: 30px;
+      border-left: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .wt-label {
+      font-size: 12px;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 30px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .tog-track {
+      position: absolute;
+      inset: 0;
+      background: var(--surface2);
+      border-radius: 9px;
+      transition: var(--transition);
+    }
+
+    .tog-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 12px;
+      height: 12px;
+      background: var(--bg);
+      border-radius: 50%;
+      transition: var(--transition);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    .toggle-switch input:checked~.tog-track {
+      background: var(--accent);
+    }
+
+    .toggle-switch input:checked~.tog-thumb {
+      left: 15px;
+      background: #fff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* API key collapsible */
+    .api-key-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .api-key-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      padding: 0 11px;
+      height: 30px;
+      border-radius: var(--r-md);
+      background: transparent;
+      border: 1px solid var(--border2);
+      transition: var(--transition);
+    }
+
+    .api-key-trigger:hover {
+      border-color: var(--text2);
+      background: var(--bg3);
+    }
+
+    .api-key-trigger-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+
+    .api-status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text3);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    .api-status.ok {
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    .api-key-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-lg);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 310px;
+      box-shadow: var(--shadow-lg);
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: var(--transition);
+    }
+
+    .api-key-dropdown.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .api-provider-btns {
+      display: flex;
+      gap: 4px;
+    }
+
+    .api-provider-btn {
+      flex: 1;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 4px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--text2);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: var(--transition);
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .api-provider-btn:hover {
+      border-color: var(--text2);
+      color: var(--text);
+      background: var(--bg3);
+    }
+
+    .api-provider-btn.active {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .api-field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .api-field-row label {
+      font-size: 11px;
+      color: var(--text3);
+      white-space: nowrap;
+      min-width: 30px;
+    }
+
+    .api-model-select {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 5px 8px;
+      border-radius: var(--r-sm);
+      font-family: var(--font-ui);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%239097a8' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 6px center;
+      padding-right: 22px;
+    }
+
+    .api-model-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .api-key-dropdown input {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: var(--r-sm);
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    }
+
+    .api-key-dropdown input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* ════════════════════════════════════
+       THREE-COLUMN LAYOUT
+       ════════════════════════════════════ */
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      padding: 0 24px 16px;
+      /* top handled by .top-bar */
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      height: 60px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+      gap: 16px;
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    /* word-toggle in top bar: remove left border */
+    .top-bar .word-toggle {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .three-col {
+      flex: 1;
+      display: flex;
+      gap: 16px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── Generic column card ── */
+    .col {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .col-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .col-body {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* ── LEFT column ── */
+    .col-left {
+      flex: 1 0 0px;
+      min-width: 210px;
+      transition: min-width var(--transition), flex var(--transition), border-width var(--transition);
+    }
+
+    .col-left.collapsed {
+      flex: 0 0 36px !important;
+      min-width: 36px !important;
+    }
+
+    .col-collapse-btn {
+      background: none;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      width: 22px;
+      height: 22px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      line-height: 1;
+      transition: var(--transition);
+    }
+
+    .col-collapse-btn:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .aside-inner {
+      padding: 1.1rem 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    /* ── MIDDLE column ── */
+    .col-mid {
+      flex: 3.236 0 0px;
+      /* golden-ratio: mid ≈ 61.8 %, each side ≈ 19.1 % */
+      min-width: 0;
+      position: relative;
+    }
+
+    .mid-content {
+      padding: 1.5rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .mid-content>* {
+      width: 100%;
+      max-width: 1280px;
+    }
+
+    /* View switching */
+    .mid-view-article #quizSection,
+    .mid-view-article #grammarSection {
+      display: none;
+    }
+
+    .mid-view-quiz #articleCard,
+    .mid-view-quiz #grammarSection {
+      display: none;
+    }
+
+    .mid-view-grammar #articleCard,
+    .mid-view-grammar #quizSection {
+      display: none;
+    }
+
+    /* Floating generate button */
+    .gen-fab {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+    }
+
+    /* ── RIGHT column ── */
+    .col-right {
+      flex: 1 0 0px;
+      min-width: 190px;
+      transition: min-width var(--transition), flex var(--transition), border-width var(--transition);
+    }
+
+    .col-right.collapsed {
+      flex: 0 0 36px !important;
+      min-width: 36px !important;
+    }
+
+    /* Thin-strip state: hide body + label, center the toggle button */
+    .col-left.collapsed .col-body,
+    .col-right.collapsed .col-body {
+      display: none;
+    }
+
+    .col-left.collapsed .col-hdr,
+    .col-right.collapsed .col-hdr {
+      justify-content: center;
+      border-bottom: none;
+      padding: 12px 7px;
+    }
+
+    .col-left.collapsed .col-hdr> :not(button),
+    .col-right.collapsed .col-hdr> :not(button) {
+      display: none;
+    }
+
+    .tool-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 12px;
+    }
+
+    .tool-card {
+      border-radius: 10px;
+      padding: 16px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      user-select: none;
+      border: 1px solid transparent;
+    }
+
+    .tool-card:hover:not(.disabled) {
+      filter: brightness(1.12);
+    }
+
+    .tool-card.disabled {
+      opacity: 0.28;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .tool-card.tc-active {
+      outline: 2px solid var(--tc-c, var(--accent));
+      outline-offset: -1px;
+    }
+
+    .tc-icon {
+      font-size: 16px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .tc-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--tc-c, var(--text2));
+      line-height: 1;
+      flex: 1;
+    }
+
+    .tc-arrow {
+      font-size: 13px;
+      color: var(--tc-c, var(--text3));
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .tc-article {
+      background: rgba(138, 160, 204, .22);
+      border-color: rgba(138, 160, 204, .38);
+      --tc-c: #8aa0cc;
+    }
+
+    .tc-quiz {
+      background: rgba(196, 147, 104, .22);
+      border-color: rgba(196, 147, 104, .38);
+      --tc-c: #c49368;
+    }
+
+    .tc-grammar {
+      background: rgba(106, 170, 140, .22);
+      border-color: rgba(106, 170, 140, .38);
+      --tc-c: #6aaa8c;
+    }
+
+    .tc-history {
+      background: rgba(168, 152, 80, .08);
+      border-color: rgba(168, 152, 80, .16);
+      --tc-c: #a89850;
+    }
+
+    .tc-theme {
+      background: rgba(154, 142, 200, .08);
+      border-color: rgba(154, 142, 200, .16);
+      --tc-c: #9a8ec8;
+    }
+
+    .tc-apikey {
+      background: rgba(196, 122, 164, .08);
+      border-color: rgba(196, 122, 164, .16);
+      --tc-c: #c47aa4;
+    }
+
+    /* Right-column inline panels */
+    .right-panel {
+      margin: 0 12px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .right-panel.open {
+      display: flex;
+    }
+
+    /* three-col needs position:relative for any absolute children */
+    .three-col {
+      position: relative;
+    }
+
+    /* Main content container */
+    #main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Welcome: center vertically in mid column */
+    .welcome {
+      min-height: 55vh;
+    }
+
+    /* Right-panel inputs (API key etc.) */
+    .right-panel input[type="password"],
+    .right-panel input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: var(--r-sm);
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      box-sizing: border-box;
+    }
+
+    .right-panel input[type="password"]:focus,
+    .right-panel input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .right-panel .api-field-row {
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Generate FAB button */
+    .gen-fab .btn-generate {
+      width: auto;
+      min-width: 140px;
+      padding: 10px 28px;
+      border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .3), 0 0 0 1px rgba(255, 255, 255, .06);
+    }
+
+    /* ════════════════════════════════════
+       SIDEBAR FORM
+       ════════════════════════════════════ */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text2);
+      text-transform: none;
+    }
+
+    select,
+    textarea {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 13px;
+      padding: 8px 11px;
+      border-radius: var(--r-md);
+      width: 100%;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    select:hover,
+    textarea:hover {
+      border-color: var(--text3);
+    }
+
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%239097a8' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 9px center;
+      padding-right: 28px;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 64px;
+      max-height: 300px;
+      overflow-y: hidden;
+      line-height: 1.55;
+    }
+
+    textarea::placeholder {
+      color: var(--text3);
+    }
+
+    /* Level grid — segmented control with sliding pill */
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-md);
+      padding: 3px;
+      position: relative;
+      --level-index: 2;
+      /* B1 by default */
+    }
+
+    /* Sliding background pill */
+    .level-grid::before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      width: calc((100% - 6px) / 6);
+      background: var(--bg2);
+      border-radius: 5px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      transform: translateX(calc(var(--level-index) * 100%));
+      transition: transform 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .level-btn {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+      border: none;
+      color: var(--text2);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: color 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .level-btn:hover {
+      color: var(--text);
+    }
+
+    .level-btn.active {
+      color: var(--accent);
+    }
+
+    .level-btn.active:hover {
+      color: var(--accent);
+    }
+
+    /* Custom select (for 学习语言 / 译文语言) — same drop animation as style-list */
+    .custom-select {
+      position: relative;
+    }
+
+    .cs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 8px 11px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: border-color 0.15s;
+      user-select: none;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .cs-header:hover {
+      border-color: var(--text3);
+    }
+
+    .custom-select.open .cs-header {
+      border-color: var(--accent);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .cs-header-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .cs-arrow {
+      font-size: 9px;
+      color: var(--text3);
+      transition: transform 0.22s ease;
+    }
+
+    .custom-select.open .cs-arrow {
+      transform: rotate(180deg);
+    }
+
+    .cs-list {
+      background: var(--bg2);
+      border: 1px solid var(--accent);
+      border-top: none;
+      border-bottom-left-radius: var(--r-md);
+      border-bottom-right-radius: var(--r-md);
+      max-height: 260px;
+      overflow-y: auto;
+      position: absolute;
+      width: 100%;
+      z-index: 60;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scaleY(0.96);
+      transform-origin: top center;
+      transition:
+        opacity 0.18s ease,
+        transform 0.26s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0.18s;
+    }
+
+    .custom-select.open .cs-list {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scaleY(1);
+      transition:
+        opacity 0.2s ease,
+        transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0s;
+    }
+
+    .cs-option {
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text2);
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .cs-option:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .cs-option.active {
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    /* Style dropdown */
+    .style-dropdown {
+      position: relative;
+    }
+
+    .style-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      padding: 8px 11px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .style-header:hover {
+      border-color: var(--text3);
+    }
+
+    .style-header.open {
+      border-color: var(--accent);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .style-header-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .style-arrow {
+      font-size: 9px;
+      color: var(--text3);
+      transition: transform 0.2s;
+    }
+
+    .style-header.open .style-arrow {
+      transform: rotate(180deg);
+    }
+
+    .style-list {
+      background: var(--bg2);
+      border: 1px solid var(--accent);
+      border-top: none;
+      border-bottom-left-radius: var(--r-md);
+      border-bottom-right-radius: var(--r-md);
+      max-height: 220px;
+      overflow-y: auto;
+      position: absolute;
+      width: 100%;
+      z-index: 60;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scaleY(0.96);
+      transform-origin: top center;
+      transition:
+        opacity 0.18s ease,
+        transform 0.26s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0.18s;
+    }
+
+    .style-list.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scaleY(1);
+      transition:
+        opacity 0.2s ease,
+        transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0s;
+    }
+
+    .style-option {
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text2);
+      cursor: pointer;
+      transition: background 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .style-option:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    .style-option.active {
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    .s-check {
+      opacity: 0;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .style-option.active .s-check {
+      opacity: 1;
+    }
+
+    .style-custom-row {
+      padding: 6px 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .style-custom-row input {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: var(--r-sm);
+      width: 100%;
+      font-family: var(--font-ui);
+    }
+
+    .style-custom-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .style-custom-row input::placeholder {
+      color: var(--text3);
+    }
+
+    /* Length slider */
+    .length-slider-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .length-slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .length-slider-top>span:first-child {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    .length-val {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 2px 9px;
+      border-radius: 5px;
+      min-width: 56px;
+      text-align: center;
+    }
+
+    /* Editable word-count input */
+    input.length-val {
+      width: 72px;
+      border: 1px solid transparent;
+      font-family: var(--font-ui);
+      cursor: text;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      padding: 2px 6px;
+    }
+
+    input.length-val::-webkit-outer-spin-button,
+    input.length-val::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input.length-val:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .length-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--surface);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Quiz count stepper */
+    .quiz-count-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quiz-count-btn {
+      width: 30px;
+      height: 30px;
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      flex-shrink: 0;
+      font-family: var(--font-ui);
+    }
+
+    .quiz-count-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .quiz-count-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .quiz-count-display {
+      flex: 1;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-sm);
+      padding: 4px 0;
+      line-height: 1.35;
+    }
+
+    .quiz-count-sub {
+      font-size: 10px;
+      color: var(--text3);
+      display: block;
+      font-weight: 400;
+    }
+
+    .quiz-warn {
+      display: none;
+      margin-top: 7px;
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
+      font-size: 11px;
+      line-height: 1.55;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .quiz-warn.show {
+      display: flex;
+    }
+
+    .quiz-warn.lvl-caution {
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      color: #d4a418;
+    }
+
+    .quiz-warn.lvl-danger {
+      background: var(--red-bg);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      color: var(--red);
+    }
+
+    .quiz-warn-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Generate button */
+    .btn-generate {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-generate:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-generate:active {
+      transform: translateY(0);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .spin-icon {
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    .btn-generate.loading .spin-icon {
+      display: block;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ════════════════════════════════════
+       MAIN — WELCOME + ARTICLE
+       ════════════════════════════════════ */
+    .welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      color: var(--text3);
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .welcome-icon {
+      font-size: 2.25rem;
+      margin-bottom: 0.4rem;
+      opacity: 0.7;
+    }
+
+    .welcome h2 {
+      font-size: 1.05rem;
+      color: var(--text);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .welcome p {
+      font-size: 13px;
+      max-width: 340px;
+      line-height: 1.75;
+      color: var(--text2);
+    }
+
+    .article-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .article-meta {
+      padding: 0.85rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .meta-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      border: 1px solid transparent;
+      text-transform: uppercase;
+    }
+
+    .badge-level {
+      background: var(--accent-bg);
+      color: var(--accent);
+      border-color: transparent;
+    }
+
+    .badge-lang {
+      background: var(--teal-bg);
+      color: var(--teal);
+    }
+
+    html.light .badge-lang {
+      color: #0a8870;
+      background: rgba(94, 234, 212, 0.15);
+    }
+
+    .badge-style {
+      background: rgba(251, 146, 60, 0.13);
+      color: #fb923c;
+      border-color: var(--border2);
+    }
+
+    html.light .badge-style {
+      background: rgba(194, 65, 12, 0.09);
+      color: #c2410c;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: var(--bg3);
+      border-radius: var(--r-sm);
+      padding: 2px;
+      gap: 1px;
+      margin-left: auto;
+    }
+
+    .view-btn {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 11px;
+      border: none;
+      background: none;
+      color: var(--text3);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: var(--transition);
+      font-family: var(--font-ui);
+    }
+
+    .view-btn:hover {
+      color: var(--text);
+    }
+
+    .view-btn.active {
+      background: var(--bg2);
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    .article-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .article-body.single {
+      grid-template-columns: 1fr;
+    }
+
+    .text-panel {
+      padding: 1.75rem 2.1rem;
+    }
+
+    .text-panel+.text-panel {
+      border-left: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .panel-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 1rem;
+    }
+
+    .article-text {
+      font-family: var(--font-read);
+      font-size: 1.3rem;
+      line-height: 1.95;
+      color: var(--text);
+      letter-spacing: 0.005em;
+    }
+
+    .translation-text {
+      font-family: var(--font-read);
+      font-size: 1.18rem;
+      line-height: 1.95;
+      color: var(--text2);
+    }
+
+    /* Clickable words */
+    .word {
+      cursor: default;
+      border-radius: 3px;
+      transition: background 0.12s, color 0.12s;
+      padding: 0 1px;
+    }
+
+    .word-mode-on .word {
+      cursor: pointer;
+    }
+
+    .word-mode-on .word:hover {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .word[data-gender="m"] {
+      border-bottom: 1.5px solid rgba(127, 179, 227, 0.55);
+    }
+
+    .word[data-gender="f"] {
+      border-bottom: 1.5px solid rgba(240, 164, 182, 0.55);
+    }
+
+    .word[data-gender="n"] {
+      border-bottom: 1.5px solid rgba(94, 234, 212, 0.5);
+    }
+
+    /* ════════════════════════════════════
+       SECTION CARDS (grammar + quiz)
+       ════════════════════════════════════ */
+    .section-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+
+    .section-card-header {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .section-card-header:hover {
+      background: var(--bg3);
+    }
+
+    .section-card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .section-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      flex: 1;
+      color: var(--text);
+    }
+
+    .section-card-arrow {
+      font-size: 10px;
+      color: var(--text3);
+      transition: transform 0.22s;
+      margin-left: auto;
+    }
+
+    .section-card-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .section-card-body {
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+      max-height: 4000px;
+      transition: max-height 0.35s ease, opacity 0.25s ease;
+      opacity: 1;
+    }
+
+    .section-card-body.collapsed {
+      max-height: 0;
+      border-top: none;
+      opacity: 0;
+    }
+
+    /* Grammar */
+    .grammar-icon {
+      background: var(--blue-bg);
+      color: var(--blue-c);
+    }
+
+    .grammar-body {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .grammar-section {
+      padding: 1.5rem 1.8rem;
+    }
+
+    .grammar-section+.grammar-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .gs-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 1rem;
+    }
+
+    .grammar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .grammar-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 13px 16px;
+    }
+
+    .gi-term {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: var(--font-ui);
+      margin-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+
+    .gi-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .gi-ex {
+      font-size: 15px;
+      color: var(--text3);
+      font-family: var(--font-read);
+      font-style: italic;
+      margin-top: 5px;
+    }
+
+    /* Vocab grid */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
+    }
+
+    .vocab-item {
+      background: var(--bg);
+      border-radius: var(--r-md);
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .vocab-item:hover {
+      border-color: var(--border2);
+      transform: translateY(-1px);
+    }
+
+    .vocab-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+
+    .vocab-word {
+      font-size: 17px;
+      font-weight: 500;
+      font-family: var(--font-read);
+      color: var(--text);
+    }
+
+    .gender-badge {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    .gb-m {
+      background: var(--blue-bg);
+      color: var(--blue-c);
+    }
+
+    .gb-f {
+      background: var(--pink-bg);
+      color: var(--pink);
+    }
+
+    .gb-n {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .gb-hide {
+      display: none;
+    }
+
+    .vocab-pos {
+      font-size: 11px;
+      color: var(--text3);
+      font-style: italic;
+    }
+
+    .vocab-def {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* Theme panel */
+    .theme-panel-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-panel-trigger {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-panel-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      width: 200px;
+      z-index: 500;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: var(--transition);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .theme-panel-dropdown.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    .theme-panel-section {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 8px;
+    }
+
+    .theme-mode-row,
+    .theme-color-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .theme-opt-btn,
+    .theme-color-btn {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 0;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .theme-color-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .theme-opt-btn.active,
+    .theme-color-btn.active {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .theme-opt-btn:hover:not(.active),
+    .theme-color-btn:hover:not(.active) {
+      border-color: var(--text3);
+      color: var(--text);
+    }
+
+    .color-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Focus mode dimming */
+    body.focus-mode .word-toggle {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    body.focus-mode #grammarSection {
+      display: none;
+    }
+
+    body.focus-mode .view-btn[onclick*="parallel"],
+    body.focus-mode .view-btn[onclick*="translation"],
+    body.focus-mode .view-btn[onclick*="both"] {
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    body.focus-mode .text-panel+.text-panel {
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Loading */
+    .pending-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 220px);
+      color: var(--text3);
+      font-size: 18px;
+      letter-spacing: .08em;
+    }
+
+    .loading-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 220px);
+    }
+
+    .loading-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.4;
+      display: inline-block;
+      margin-right: 5px;
+      animation: dotpulse 1.2s ease-in-out infinite;
+    }
+
+    .loading-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loading-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes dotpulse {
+
+      0%,
+      80%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.85);
+      }
+
+      40% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ════════════════════════════════════
+       QUIZ
+       ════════════════════════════════════ */
+    .quiz-card {
+      /* inherits section-card */
+    }
+
+    .quiz-card-inner {
+      padding: 1.5rem 1.8rem;
+    }
+
+    .quiz-sub {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .quiz-score {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--bg3);
+    }
+
+    .questions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .question-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.1rem 1.4rem;
+    }
+
+    .question-text {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 11px;
+      line-height: 1.65;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-btn {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--font-ui);
+      font-size: 13px;
+      padding: 9px 13px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--accent-bg);
+    }
+
+    .option-btn.correct {
+      background: var(--green-bg);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .option-btn.wrong {
+      background: var(--red-bg);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .option-btn:disabled {
+      cursor: not-allowed;
+    }
+
+    .explanation {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 9px;
+      padding: 9px 12px;
+      background: var(--bg2);
+      border-left: 2px solid var(--accent);
+      border-radius: 5px;
+      line-height: 1.65;
+      display: none;
+    }
+
+    .explanation.show {
+      display: block;
+    }
+
+    .btn-submit {
+      margin-top: 0.75rem;
+      padding: 9px 22px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: var(--accent2);
+    }
+
+    #retryQ {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+    }
+
+    #retryQ:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    /* ════════════════════════════════════
+       TOOLTIP
+       ════════════════════════════════════ */
+    .tooltip {
+      position: fixed;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: var(--r-md);
+      padding: 11px 14px;
+      max-width: 260px;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: var(--transition);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tt-word-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 3px;
+    }
+
+    .tt-word {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: var(--font-read);
+    }
+
+    .tt-pos {
+      font-size: 10px;
+      color: var(--text3);
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+
+    .tt-def {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+
+    .tt-loading {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    /* ════════════════════════════════════
+       HISTORY PANEL
+       ════════════════════════════════════ */
+    .hist-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(2px);
+      z-index: 300;
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .hist-overlay.show {
+      display: flex;
+    }
+
+    .hist-panel {
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .hist-hdr {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .hist-hdr-title {
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+      color: var(--text);
+    }
+
+    .hist-close {
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 2px 6px;
+      line-height: 1;
+      border-radius: 4px;
+    }
+
+    .hist-close:hover {
+      color: var(--text);
+      background: var(--bg3);
+    }
+
+    .hist-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.75rem;
+    }
+
+    .hist-empty {
+      text-align: center;
+      color: var(--text3);
+      font-size: 12px;
+      padding: 2.5rem;
+    }
+
+    .hist-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 11px 13px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      padding-right: 36px;
+    }
+
+    .hist-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .hist-item-badges {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .hist-item-preview {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .hist-item-date {
+      font-size: 10px;
+      color: var(--text3);
+      margin-top: 5px;
+    }
+
+    .hist-clear-btn {
+      margin: 0.75rem;
+      padding: 8px;
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      text-align: center;
+      font-family: var(--font-ui);
+      transition: var(--transition);
+    }
+
+    .hist-clear-btn:hover {
+      background: var(--red-bg);
+      border-color: rgba(248, 113, 113, 0.35);
+      color: var(--red);
+    }
+
+    .hist-new-btn {
+      margin: 0.85rem 0.75rem 0;
+      padding: 10px 12px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      font-family: var(--font-ui);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: var(--transition);
+    }
+
+    .hist-new-btn:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .hist-new-icon {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+    }
+
+    .hist-del-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+      padding: 3px 6px;
+      border-radius: 4px;
+      transition: var(--transition);
+      opacity: 0;
+    }
+
+    .hist-item:hover .hist-del-btn {
+      opacity: 1;
+    }
+
+    .hist-del-btn:hover {
+      color: var(--red);
+      background: var(--red-bg);
+    }
+
+    /* Streaming cursor */
+    .streaming-indicator {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--accent);
+      border-radius: 1px;
+      animation: blink 0.9s ease-in-out infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .error-msg {
+      background: var(--red-bg);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      color: var(--red);
+      padding: 10px 14px;
+      border-radius: var(--r-md);
+      font-size: 13px;
+    }
+
+    /* Toast (top-center, fixed) */
+    .toast-error {
+      position: fixed;
+      top: calc(var(--header-h) + 14px);
+      left: 50%;
+      background: var(--bg2);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: var(--red);
+      padding: 11px 14px 11px 16px;
+      border-radius: var(--r-md);
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      transform: translate(-50%, -12px);
+      transition: opacity 0.25s, transform 0.25s;
+      max-width: min(440px, calc(100vw - 32px));
+    }
+
+    .toast-error.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast-error .toast-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .toast-error .toast-msg {
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    .toast-error .toast-close {
+      background: none;
+      border: none;
+      color: var(--red);
+      opacity: 0.65;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .toast-error .toast-close:hover {
+      opacity: 1;
+      background: var(--red-bg);
+    }
+
+    /* Parallel sentence-by-sentence view */
+    .parallel-overlay {
+      border-top: 1px solid var(--border);
+    }
+
+    .parallel-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .parallel-header-cell {
+      padding: 0.55rem 1.2rem;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .parallel-header-cell+.parallel-header-cell {
+      border-left: 1px solid var(--border);
+    }
+
+    .parallel-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .parallel-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+
+    .parallel-pair:last-child {
+      border-bottom: none;
+    }
+
+    .parallel-pair:hover .parallel-cell.src {
+      background: var(--bg3);
+    }
+
+    .parallel-pair:hover .parallel-cell.tgt {
+      background: var(--surface);
+    }
+
+    .parallel-cell {
+      padding: 0.9rem 1.2rem;
+      font-family: var(--font-read);
+      line-height: 1.9;
+      vertical-align: top;
+    }
+
+    .parallel-cell.src {
+      font-size: 1.1rem;
+      color: var(--text);
+      border-right: 1px solid var(--border);
+    }
+
+    .parallel-cell.tgt {
+      font-size: 1.05rem;
+      color: var(--text2);
+      background: var(--bg);
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 4px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--text3);
+      background-clip: padding-box;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .article-body:not(.single) {
+        grid-template-columns: 1fr;
+      }
+
+      .text-panel+.text-panel {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      main {
+        padding: 1.25rem 1.25rem 2rem;
+      }
+
+      .text-panel {
+        padding: 1.4rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOP BAR
+       ═══════════════════════════════════════ -->
+  <div class="top-bar">
+    <div class="logo">Lingua<span>AI</span></div>
+    <div class="top-bar-right">
+      <div class="mode-toggle">
+        <button class="mode-btn focus-active active" id="modeFocusBtn" onclick="setMode('focus')">专注模式</button>
+        <button class="mode-btn" id="modeStudyBtn" onclick="setMode('study')">学习模式</button>
+      </div>
+      <div class="word-toggle">
+        <span class="wt-label">悬停释义</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="wordModeToggle" checked onchange="updateWordMode()">
+          <div class="tog-track"></div>
+          <div class="tog-thumb"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       THREE-COLUMN LAYOUT
+       ═══════════════════════════════════════ -->
+  <div class="three-col" id="threecol">
+
+    <!-- ── LEFT COLUMN: params ── -->
+    <div class="col col-left" id="colLeft">
+      <div class="col-hdr">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--text3)">设置</span>
+        <button class="col-collapse-btn" id="collapseBtn" onclick="toggleLeft()" title="收起">‹</button>
+      </div>
+      <div class="col-body">
+        <div class="aside-inner">
+
+          <div class="field-group">
+            <div class="field-label">学习语言</div>
+            <div class="custom-select" id="targetLangSelect" data-target="targetLang" data-callback="onLangChange">
+              <div class="cs-header" onclick="toggleCS(event, 'targetLangSelect')">
+                <span class="cs-header-text">德语 German</span>
+                <span class="cs-arrow">▼</span>
+              </div>
+              <div class="cs-list">
+                <div class="cs-option active" data-value="German" onclick="selectCS('targetLangSelect', this)">德语 German
+                </div>
+                <div class="cs-option" data-value="French" onclick="selectCS('targetLangSelect', this)">法语 French</div>
+                <div class="cs-option" data-value="Spanish" onclick="selectCS('targetLangSelect', this)">西班牙语 Spanish
+                </div>
+                <div class="cs-option" data-value="Italian" onclick="selectCS('targetLangSelect', this)">意大利语 Italian
+                </div>
+                <div class="cs-option" data-value="Japanese" onclick="selectCS('targetLangSelect', this)">日语 Japanese
+                </div>
+                <div class="cs-option" data-value="Korean" onclick="selectCS('targetLangSelect', this)">韩语 Korean</div>
+                <div class="cs-option" data-value="Portuguese" onclick="selectCS('targetLangSelect', this)">葡萄牙语
+                  Portuguese</div>
+                <div class="cs-option" data-value="Russian" onclick="selectCS('targetLangSelect', this)">俄语 Russian
+                </div>
+                <div class="cs-option" data-value="Arabic" onclick="selectCS('targetLangSelect', this)">阿拉伯语 Arabic
+                </div>
+                <div class="cs-option" data-value="Dutch" onclick="selectCS('targetLangSelect', this)">荷兰语 Dutch</div>
+                <div class="cs-option" data-value="English" onclick="selectCS('targetLangSelect', this)">英语 English
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="targetLang" value="German">
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">译文语言</div>
+            <div class="custom-select" id="nativeLangSelect" data-target="nativeLang">
+              <div class="cs-header" onclick="toggleCS(event, 'nativeLangSelect')">
+                <span class="cs-header-text">中文</span>
+                <span class="cs-arrow">▼</span>
+              </div>
+              <div class="cs-list">
+                <div class="cs-option active" data-value="Chinese" onclick="selectCS('nativeLangSelect', this)">中文</div>
+                <div class="cs-option" data-value="English" onclick="selectCS('nativeLangSelect', this)">英文</div>
+              </div>
+            </div>
+            <input type="hidden" id="nativeLang" value="Chinese">
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">难度等级</div>
+            <div class="level-grid">
+              <div class="level-btn" data-level="A1">A1</div>
+              <div class="level-btn" data-level="A2">A2</div>
+              <div class="level-btn active" data-level="B1">B1</div>
+              <div class="level-btn" data-level="B2">B2</div>
+              <div class="level-btn" data-level="C1">C1</div>
+              <div class="level-btn" data-level="C2">C2</div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">文章风格</div>
+            <div class="style-dropdown" id="styleDropdown">
+              <div class="style-header" id="styleHeader" onclick="toggleStyleList()">
+                <span class="style-header-text" id="styleHeaderText">日常生活</span>
+                <span class="style-arrow">▼</span>
+              </div>
+              <div class="style-list" id="styleList">
+                <div class="style-option active" data-style="日常生活" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>日常生活</div>
+                <div class="style-option" data-style="旅行游记" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>旅行游记</div>
+                <div class="style-option" data-style="美食文化" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>美食文化</div>
+                <div class="style-option" data-style="历史故事" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>历史故事</div>
+                <div class="style-option" data-style="科技话题" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>科技话题</div>
+                <div class="style-option" data-style="自然环境" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>自然环境</div>
+                <div class="style-option" data-style="文学诗歌" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>文学诗歌</div>
+                <div class="style-option" data-style="新闻报道" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>新闻报道</div>
+                <div class="style-option" data-style="商务职场" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>商务职场</div>
+                <div class="style-option" data-style="儿童故事" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>儿童故事</div>
+                <div class="style-option" data-style="custom" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>其他（自定义）</div>
+                <div class="style-custom-row" id="styleCustomRow" style="display:none">
+                  <input type="text" id="styleCustomInput" placeholder="输入自定义风格…" oninput="onCustomStyle()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">指定题材（可选）</div>
+            <textarea id="customTopic" placeholder="例如：在巴黎咖啡馆的一个早晨…"></textarea>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">文章长度</div>
+            <div class="length-slider-wrap">
+              <div class="length-slider-top">
+                <span style="font-size:11px;color:var(--text3)">目标词数</span>
+                <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
+                  onchange="onLengthChange()" onblur="onLengthChange()">
+              </div>
+              <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
+                oninput="updateLengthLabel()">
+              <div class="length-range">
+                <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">题目数量</div>
+            <div class="quiz-count-row">
+              <button class="quiz-count-btn" id="quizCountDec" onclick="changeQuizCount(-1)">−</button>
+              <div class="quiz-count-display">
+                <span id="quizCountVal">4</span>
+                <span class="quiz-count-sub">道题目</span>
+              </div>
+              <button class="quiz-count-btn" id="quizCountInc" onclick="changeQuizCount(1)">+</button>
+            </div>
+            <div class="quiz-warn" id="quizWarn">
+              <span class="quiz-warn-icon">⚠</span>
+              <span id="quizWarnText"></span>
+            </div>
+          </div>
+
+        </div><!-- end aside-inner -->
+      </div><!-- end col-body -->
+    </div><!-- end col-left -->
+
+    <!-- ── MIDDLE COLUMN: content area ── -->
+    <div class="col col-mid" id="colMid">
+      <div class="col-body mid-content">
+        <div id="main">
+          <div class="welcome" id="welcome">
+            <div class="welcome-icon">📖</div>
+            <h2>配置好语言设置，开始学习</h2>
+            <p>AI 将生成适合你水平的短文，提供译文对照、词汇释义、语法分析和测验题目。</p>
+          </div>
+        </div>
+      </div>
+      <div class="gen-fab" id="genFab">
+        <button class="btn-generate" id="generateBtn" onclick="generateArticle()">
+          <svg class="spin-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5">
+            <path
+              d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+          </svg>
+          生成文章
+        </button>
+      </div>
+    </div><!-- end col-mid -->
+
+    <!-- ── RIGHT COLUMN: tool cards + inline panels ── -->
+    <div class="col col-right" id="colRight">
+      <div class="col-hdr">
+        <button class="col-collapse-btn" id="collapseRightBtn" onclick="toggleRight()" title="收起">›</button>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--text3)">工具</span>
+      </div>
+      <div class="col-body">
+        <div class="tool-grid">
+          <div class="tool-card tc-article disabled" id="tcArticle" onclick="switchView('article')">
+            <div class="tc-icon">≡</div>
+            <div class="tc-label">文章</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-quiz disabled" id="tcQuiz" onclick="switchView('quiz')">
+            <div class="tc-icon">✎</div>
+            <div class="tc-label">题目</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-grammar disabled" id="tcGrammar" onclick="switchView('grammar')">
+            <div class="tc-icon">Ω</div>
+            <div class="tc-label">语法和单词</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-history" id="tcHistory" onclick="openHistory()">
+            <div class="tc-icon">↺</div>
+            <div class="tc-label">历史文章</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-theme" id="tcTheme" onclick="toggleThemePanel()">
+            <div class="tc-icon">◈</div>
+            <div class="tc-label">主题</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-apikey" id="tcApiKey" onclick="toggleApiKey()">
+            <div class="tc-icon">⌘</div>
+            <div class="tc-label">API Key</div>
+            <div class="tc-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- API Key inline panel -->
+        <div class="right-panel" id="apiKeyDropdown">
+          <div class="api-field-row">
+            <label>模型</label>
+            <select id="apiModelSelect" class="api-model-select" onchange="setModel(this.value)"></select>
+          </div>
+          <div class="api-field-row">
+            <label id="apiKeyLabel">Key</label>
+            <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" oninput="saveKey()">
+          </div>
+          <div class="api-field-row" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div class="api-status" id="apiStatus"></div>
+              <span style="font-size:11px;color:var(--text3)">DeepSeek</span>
+            </div>
+            <button class="api-provider-btn active" onclick="toggleDebug()" id="debugToggleBtn"
+              style="flex:none;padding:3px 10px">Debug</button>
+          </div>
+        </div>
+
+        <!-- Theme inline panel -->
+        <div class="right-panel" id="themePanelDropdown">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.04em;margin-bottom:2px">明暗模式
+          </div>
+          <div class="theme-mode-row">
+            <button class="theme-opt-btn active" id="modeDarkBtn" onclick="setAppearance('dark')">🌙 暗色</button>
+            <button class="theme-opt-btn" id="modeLightBtn" onclick="setAppearance('light')">☀️ 亮色</button>
+          </div>
+        </div>
+
+      </div><!-- end col-body -->
+    </div><!-- end col-right -->
+
+  </div><!-- end three-col -->
+
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip">
+    <div class="tt-word-row">
+      <span class="tt-word" id="ttWord"></span>
+      <span class="gender-badge gb-hide" id="ttGender"></span>
+    </div>
+    <div class="tt-pos" id="ttPos"></div>
+    <div class="tt-def" id="ttDef"></div>
+    <div class="tt-loading" id="ttLoading"></div>
+  </div>
+
+  <!-- History overlay -->
+  <div class="hist-overlay" id="histOverlay" onclick="histOverlayClick(event)">
+    <div class="hist-panel">
+      <div class="hist-hdr">
+        <span class="hist-hdr-title">历史文章</span>
+        <button class="hist-close" onclick="closeHistory()">✕</button>
+      </div>
+      <button class="hist-new-btn" onclick="newArticle()">
+        <span class="hist-new-icon">+</span>
+        <span>新建文章</span>
+      </button>
+      <div class="hist-list" id="histList"></div>
+      <button class="hist-clear-btn" onclick="clearHistory()">清空全部历史</button>
+    </div>
+  </div>
+
+  <script>
+    const HIST_KEY = 'linguaai_v2_history';
+
+    // ─── API 配置（DeepSeek）───
+    // 如需修改可选模型，直接编辑下方 models 数组即可
+    const PROVIDERS = {
+      deepseek: { name: 'DeepSeek', url: 'https://api.deepseek.com/chat/completions', models: ['deepseek-v4-flash', 'deepseek-v4-pro'], placeholder: 'sk-...', type: 'openai' },
+    };
+    const currentProvider = 'deepseek';
+    let currentModel = '';
+
+    // Languages with grammatical gender
+    const GENDER_LANGS = {
+      French: { m: 'masc.', f: 'fém.', n: null, label: '法语性别' },
+      German: { m: 'mask.', f: 'fem.', n: 'neutr.', label: '德语性' },
+      Spanish: { m: 'masc.', f: 'fem.', n: null, label: '西语性别' },
+      Italian: { m: 'masc.', f: 'femm.', n: null, label: '意语性别' },
+      Portuguese: { m: 'masc.', f: 'fem.', n: null, label: '葡语性别' },
+      Russian: { m: 'м.р.', f: 'ж.р.', n: 'ср.р.', label: '俄语性' },
+      Arabic: { m: 'مذ.', f: 'مؤ.', n: null, label: '阿语性别' },
+      Dutch: { m: 'de(男)', f: 'de(女)', n: 'het', label: '荷语性' },
+    };
+
+    let currentLevel = 'B1';
+    let currentStyle = '日常生活';
+    let wordModeOn = true;
+    let articleContent = '';
+    let quizData = null;
+    let grammarData = null;
+    let tooltipTimer = null;
+    const tooltipCache = {};
+
+    // ─── Length slider ───
+    const WORDS_MIN = 100, WORDS_MAX = 800;
+    function getTargetWords() {
+      return parseInt($('lengthVal').value) || 150;
+    }
+    function getMaxTok(words) { return Math.round(words * 3.5) + 4000; }
+    function updateLengthLabel() {
+      // slider moved → sync the number input
+      const v = parseInt($('lengthSlider').value);
+      $('lengthVal').value = v;
+      checkQuizWarn();
+    }
+    function onLengthChange() {
+      // number input changed → clamp then sync slider
+      let v = parseInt($('lengthVal').value);
+      if (isNaN(v) || v < WORDS_MIN) v = WORDS_MIN;
+      if (v > WORDS_MAX) v = WORDS_MAX;
+      $('lengthVal').value = v;
+      $('lengthSlider').value = v;
+      checkQuizWarn();
+    }
+
+    // ─── Quiz count ───
+    let quizCount = 4;
+    const QUIZ_MIN = 1, QUIZ_MAX = 20;
+    // Warn thresholds: words-per-question ratios
+    // <25 w/q → caution; <12 w/q → danger
+    const RATIO_CAUTION = 25, RATIO_DANGER = 12;
+
+    function changeQuizCount(delta) {
+      quizCount = Math.min(QUIZ_MAX, Math.max(QUIZ_MIN, quizCount + delta));
+      $('quizCountVal').textContent = quizCount;
+      $('quizCountDec').disabled = quizCount <= QUIZ_MIN;
+      $('quizCountInc').disabled = quizCount >= QUIZ_MAX;
+      checkQuizWarn();
+    }
+
+    function checkQuizWarn() {
+      const words = getTargetWords();
+      const ratio = words / quizCount;
+      const warn = $('quizWarn');
+      const txt = $('quizWarnText');
+      // estimate quiz tokens: ~200 base + 120 per question
+      const quizTok = 200 + quizCount * 120;
+
+      if (ratio < RATIO_DANGER) {
+        warn.className = 'quiz-warn lvl-danger show';
+        txt.textContent = `文章仅 ${words} 词，每题平均只有 ${ratio.toFixed(0)} 词内容可参考，题目质量会明显下降，且测验将消耗约 ${quizTok} token，请减少题目数量或增加文章长度。`;
+      } else if (ratio < RATIO_CAUTION) {
+        warn.className = 'quiz-warn lvl-caution show';
+        txt.textContent = `文章约 ${words} 词，每题平均 ${ratio.toFixed(0)} 词，部分题目可能重复或质量偏低。测验预计消耗约 ${quizTok} token。`;
+      } else {
+        warn.className = 'quiz-warn';
+      }
+    }
+
+
+
+    const $ = id => document.getElementById(id);
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function escA(s) { return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function getKey() {
+      return localStorage.getItem(`linguaai_key_${currentProvider}`) || $('apiKey').value.trim();
+    }
+    function saveKey() {
+      localStorage.setItem(`linguaai_key_${currentProvider}`, $('apiKey').value.trim());
+      checkKey();
+    }
+    function checkKey() {
+      $('apiStatus').className = 'api-status' + (getKey().length > 10 ? ' ok' : '');
+    }
+    function setProvider(provider) {
+      const p = PROVIDERS[provider];
+      const stored = localStorage.getItem(`linguaai_model_${provider}`);
+      currentModel = (stored && p.models.includes(stored)) ? stored : p.models[0];
+      $('apiModelSelect').innerHTML = p.models.map(m =>
+        `<option value="${m}"${m === currentModel ? ' selected' : ''}>${m}</option>`).join('');
+      $('apiKey').value = getKey();
+      checkKey();
+    }
+    function setModel(model) {
+      currentModel = model;
+      localStorage.setItem(`linguaai_model_${currentProvider}`, model);
+    }
+    function isGendered(lang) { return !!GENDER_LANGS[lang]; }
+
+    // ─── Level ───
+    const LEVEL_INDEX = { A1: 0, A2: 1, B1: 2, B2: 3, C1: 4, C2: 5 };
+    document.querySelectorAll('.level-btn').forEach(b => b.addEventListener('click', function () {
+      document.querySelectorAll('.level-btn').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+      currentLevel = this.dataset.level;
+      // animate sliding pill
+      const grid = this.parentElement;
+      grid.style.setProperty('--level-index', LEVEL_INDEX[currentLevel]);
+    }));
+
+    // ─── Custom select (学习语言 / 译文语言) ───
+    function toggleCS(e, id) {
+      e.stopPropagation();
+      const el = document.getElementById(id);
+      // close other open custom-selects
+      document.querySelectorAll('.custom-select.open').forEach(o => { if (o !== el) o.classList.remove('open'); });
+      el.classList.toggle('open');
+    }
+    function selectCS(id, opt) {
+      const el = document.getElementById(id);
+      el.querySelectorAll('.cs-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      el.querySelector('.cs-header-text').textContent = opt.textContent;
+      const targetId = el.dataset.target;
+      const hidden = document.getElementById(targetId);
+      const prev = hidden.value;
+      hidden.value = opt.dataset.value;
+      el.classList.remove('open');
+      // optional callback (e.g. onLangChange)
+      const cb = el.dataset.callback;
+      if (cb && prev !== hidden.value && typeof window[cb] === 'function') window[cb]();
+    }
+    document.addEventListener('click', e => {
+      document.querySelectorAll('.custom-select').forEach(cs => {
+        if (!cs.contains(e.target)) cs.classList.remove('open');
+      });
+    });
+
+    // ─── Style dropdown ───
+    function toggleStyleList() {
+      $('styleHeader').classList.toggle('open');
+      $('styleList').classList.toggle('open');
+    }
+    function selectStyle(el) {
+      document.querySelectorAll('.style-option').forEach(o => o.classList.remove('active'));
+      el.classList.add('active');
+      const isCustom = el.dataset.style === 'custom';
+      $('styleCustomRow').style.display = isCustom ? 'block' : 'none';
+      if (!isCustom) {
+        currentStyle = el.dataset.style;
+        $('styleHeaderText').textContent = currentStyle;
+        $('styleHeader').classList.remove('open');
+        $('styleList').classList.remove('open');
+      } else {
+        const v = $('styleCustomInput').value;
+        currentStyle = v || '自定义风格';
+        $('styleHeaderText').textContent = v || '其他（自定义）';
+      }
+    }
+    function onCustomStyle() {
+      const v = $('styleCustomInput').value.trim();
+      currentStyle = v || '自定义风格';
+      $('styleHeaderText').textContent = v || '其他（自定义）';
+    }
+    document.addEventListener('click', e => {
+      if (!$('styleDropdown').contains(e.target)) {
+        $('styleHeader').classList.remove('open');
+        $('styleList').classList.remove('open');
+      }
+    });
+
+    // ─── Auto-grow textarea ───
+    document.querySelectorAll('textarea').forEach(ta => {
+      ta.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 300) + 'px';
+        this.style.overflowY = this.scrollHeight > 300 ? 'auto' : 'hidden';
+      });
+    });
+
+    // ─── Lang change ───
+    function onLangChange() { Object.keys(tooltipCache).forEach(k => delete tooltipCache[k]); }
+
+    // ─── Word mode toggle ───
+    function updateWordMode() {
+      wordModeOn = $('wordModeToggle').checked;
+      document.querySelectorAll('.article-text').forEach(el => {
+        el.classList.toggle('word-mode-on', wordModeOn);
+      });
+    }
+
+    // ─── API ───
+    const debugLog = [];
+    async function callAPI(messages, sys, stream, onChunk, maxTok = 1000, jsonMode = false, label = '') {
+      const key = getKey();
+      if (!key) throw new Error('请先输入 API Key');
+      const provider = PROVIDERS[currentProvider];
+
+      // ── DeepSeek / OpenAI 兼容接口 ──
+      const msgs = sys ? [{ role: 'system', content: sys }, ...messages] : messages;
+      const body = { model: currentModel, max_tokens: maxTok, messages: msgs, stream: !!stream, thinking: { type: 'disabled' } };
+      if (jsonMode) body.response_format = { type: 'json_object' };
+      const resp = await fetch(provider.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+        body: JSON.stringify(body)
+      });
+      if (!resp.ok) {
+        const e = await resp.json().catch(() => ({}));
+        throw new Error(e.error?.message || `API 错误 ${resp.status}`);
+      }
+      if (stream) {
+        const reader = resp.body.getReader(), dec = new TextDecoder();
+        let full = '', rawBody = '', buf = '';
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const chunk = dec.decode(value, { stream: true });
+            rawBody += chunk;
+            buf += chunk;
+            const lines = buf.split('\n');
+            buf = lines.pop();
+            for (const line of lines) {
+              if (line.startsWith('data: ') && line.trim() !== 'data: [DONE]') {
+                try {
+                  const delta = JSON.parse(line.slice(6)).choices?.[0]?.delta?.content;
+                  if (delta) { full += delta; onChunk && onChunk(delta, full); }
+                } catch { }
+              }
+            }
+          }
+        } finally {
+          debugAppend(label || 'stream', rawBody);
+        }
+        return full;
+      } else {
+        const rawText = await resp.text();
+        debugAppend(label || 'json', rawText);
+        return JSON.parse(rawText).choices[0].message.content;
+      }
+    }
+
+    // ─── JSON parse helper (with AI-assisted repair) ───
+    function tryParse(text) {
+      let s = text.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+      try { return JSON.parse(s); } catch { }
+      const m = s.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+      if (m) { try { return JSON.parse(m[1]); } catch { } }
+      return null;
+    }
+
+    async function parseOrRepairJSON(raw) {
+      // Pass 1: local strip + regex extraction
+      const r1 = tryParse(raw);
+      if (r1 !== null) return r1;
+
+      // Pass 2: ask the model to fix the broken JSON (one retry)
+      let fixed;
+      try {
+        fixed = await callAPI(
+          [{ role: 'user', content: `The following output should be valid JSON but contains syntax errors. Return ONLY the corrected JSON — no explanation, no markdown fences:\n\n${raw.slice(0, 3000)}` }],
+          'You are a JSON repair assistant. Output only valid JSON, nothing else.',
+          false, null, 2500, false, 'JSON修复'
+        );
+      } catch (e) {
+        throw new Error(`JSON 解析失败（修复请求也出错）\n原始回复: ${raw.slice(0, 200)}`);
+      }
+
+      const r2 = tryParse(fixed);
+      if (r2 !== null) return r2;
+
+      throw new Error(`JSON 解析失败（修复后仍无效）\n原始回复: ${raw.slice(0, 200)}`);
+    }
+
+    // ─── Translation revision helper ───
+    // Takes sentence pairs, runs a revision pass to improve accuracy, returns revised pairs.
+    async function reviseSentencePairs(pairs, lang, native) {
+      const pairsJson = JSON.stringify(pairs);
+      const revised = await callAPI(
+        [{ role: 'user', content: `You are a professional ${native} translator reviewing a sentence-by-sentence translation of a ${lang} text.\n\nReview each translation for accuracy, naturalness and completeness. Fix any errors, awkward phrasing or omissions. Keep the same JSON structure.\n\nReturn ONLY the corrected JSON array (no markdown, no explanation):\n[{"src":"original ${lang} sentence","tgt":"revised ${native} translation"},...]\n\nOriginal pairs:\n${pairsJson}` }],
+        `Expert ${lang}→${native} translation revisor. Return ONLY valid JSON array.`,
+        false, null, 2500, true, '译文校对'
+      );
+      try {
+        return await parseOrRepairJSON(revised);
+      } catch {
+        return pairs; // fallback: keep original if revision itself breaks
+      }
+    }
+
+
+    async function generateArticle() {
+      if (!getKey()) { showError('请先输入 API Key'); return; }
+      const lang = $('targetLang').value, native = $('nativeLang').value, topic = $('customTopic').value.trim();
+      const btn = $('generateBtn');
+      btn.disabled = true; btn.classList.add('loading');
+      btn.childNodes[btn.childNodes.length - 1].textContent = ' 生成中…';
+      articleContent = ''; quizData = null; grammarData = null;
+      submitted = false; Object.keys(picked).forEach(k => delete picked[k]);
+
+      const targetWords = getTargetWords();
+      const tolerance = Math.max(10, Math.round(targetWords * 0.1));
+      const wordRange = `${targetWords - tolerance}-${targetWords + tolerance}`;
+      const maxTok = getMaxTok(targetWords);
+      const topicLine = topic ? `The article must be about: "${topic}".` : `Choose a vivid topic matching the "${currentStyle}" style.`;
+      const main = $('main');
+      updateCardState(false);
+      main.innerHTML = `
+    <div class="article-card" id="articleCard">
+      <div class="article-meta">
+        <span class="meta-badge badge-level">${esc(currentLevel)}</span>
+        <span class="meta-badge badge-lang">${esc(lang)}</span>
+        <span class="meta-badge badge-style">${esc(currentStyle)}</span>
+        <div class="view-toggle" id="viewToggle" style="display:none">
+          <button class="view-btn active" onclick="setView('article')">原文</button>
+          <button class="view-btn" onclick="setView('both')">双栏</button>
+          <button class="view-btn" onclick="setView('parallel')">逐句</button>
+        </div>
+      </div>
+      <div class="article-body single" id="articleBody">
+        <div class="text-panel">
+          <div class="panel-label">${esc(lang)} 原文</div>
+          <div class="article-text${wordModeOn ? ' word-mode-on' : ''}" id="articleText" data-lang="${esc(lang)}" data-native="${esc(native)}"><span class="streaming-indicator"></span></div>
+        </div>
+        <div class="text-panel" style="display:none">
+          <div class="panel-label" id="rightPanelLabel">${esc(native)} 译文</div>
+          <div class="translation-text" id="translationText" style="color:var(--text3);font-style:italic">等待原文生成…</div>
+        </div>
+      </div>
+    </div>
+    <div id="quizSection"><div class="pending-placeholder">等待生成……</div></div>
+    <div id="grammarSection"><div class="pending-placeholder">等待生成……</div></div>`;
+      switchView('article');
+
+      try {
+        // 1. Article
+        const aEl = $('articleText');
+        articleContent = await callAPI(
+          [{ role: 'user', content: `Write an article (${wordRange} words) in ${lang} at CEFR ${currentLevel}. Style: ${currentStyle}. ${topicLine} Output only the article, no title, no translation.` }],
+          `You write natural engaging ${lang} text at CEFR ${currentLevel}. Output only the article text.`,
+          true, (_, f) => { aEl.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, maxTok, false, '文章生成'
+        );
+        aEl.innerHTML = makeWords(articleContent, lang);
+        setupWordHover();
+        $('viewToggle').style.display = 'flex';
+        updateCardState(true);
+
+        // 2. Translation (sentence-pair JSON for parallel view)
+        const tEl = $('translationText');
+        tEl.removeAttribute('style');
+        tEl.innerHTML = '正在翻译…<span class="streaming-indicator"></span>';
+        let sentencePairs = [];
+        let translation = '';
+        try {
+          const rawTrans = await callAPI(
+            [{ role: 'user', content: `Split the following ${lang} text into individual sentences, then translate each sentence into ${native}. Return ONLY a JSON array, no markdown:\n[{"src":"original sentence","tgt":"translated sentence"},...]\n\nText:\n${articleContent}` }],
+            `You are a precise ${native} translator. Split text into sentences and translate each. Return ONLY a JSON array.`,
+            false, null, 2000, true, '句对翻译'
+          );
+          sentencePairs = await parseOrRepairJSON(rawTrans);
+          tEl.innerHTML = '正在校对译文…<span class="streaming-indicator"></span>';
+          sentencePairs = await reviseSentencePairs(sentencePairs, lang, native);
+          translation = sentencePairs.map(p => p.tgt).join(' ');
+          currentSentencePairs = sentencePairs;
+          tEl.innerHTML = esc(translation);
+        } catch {
+          // fallback: plain translation
+          translation = await callAPI(
+            [{ role: 'user', content: `Translate this ${lang} text to ${native}:\n\n${articleContent}` }],
+            `Faithful ${native} translator. Output only the translation.`,
+            true, (_, f) => { tEl.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 800, false, '译文兜底'
+          );
+          tEl.innerHTML = esc(translation);
+        }
+
+        // 3. Quiz, then Grammar — sequentially, matching UI order
+        await doQuiz(lang, native, articleContent);
+        await doGrammar(lang, native, articleContent);
+
+        // 4. Save history
+        saveHist({
+          lang, native, level: currentLevel, style: currentStyle, model: currentModel,
+          article: articleContent, translation, sentencePairs, grammarData, quizData,
+          date: new Date().toLocaleString('zh-CN')
+        });
+
+      } catch (e) { showError(e.message); }
+      finally {
+        btn.disabled = false; btn.classList.remove('loading');
+        btn.childNodes[btn.childNodes.length - 1].textContent = ' 生成文章';
+      }
+    }
+
+    // ─── Grammar & Vocab ───
+    async function doGrammar(lang, native, article) {
+      const gs = $('grammarSection');
+      gs.innerHTML = `<div class="loading-placeholder"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><span style="margin-left:12px;color:var(--text3);font-size:17px">正在分析语法和词汇…</span></div>`;
+      const gNote = isGendered(lang)
+        ? `For nouns in vocabulary, include their grammatical gender: "m" (masculine), "f" (feminine)${GENDER_LANGS[lang].n ? ', "n" (neuter)' : ''}, or "none".`
+        : `Set gender to "none" for all vocabulary items.`;
+      try {
+        const raw = await callAPI(
+          [{ role: 'user', content: `Analyze this ${lang} article for a CEFR ${currentLevel} learner studying ${lang} as a ${native} speaker.\n${gNote}\n\nArticle:\n${article}\n\nReturn ONLY this JSON (no markdown, no backticks):\n{"grammar":[{"point":"grammar point name in ${native}","explanation":"brief explanation in ${native}","example":"example from the article in ${lang}"}],"vocabulary":[{"word":"word in ${lang}","gender":"m|f|n|none","pos":"part of speech in ${native}","definition":"meaning in ${native}"}]}\n\nProvide 4-6 grammar points and 6-10 key vocabulary items.` }],
+          `You are a ${lang} teacher. Return ONLY valid JSON, no markdown.`,
+          false, null, 2000, true, '语法词汇'
+        );
+        grammarData = await parseOrRepairJSON(raw);
+        renderGrammar(grammarData, lang);
+      } catch (e) {
+        gs.innerHTML = `<div class="grammar-card"><div class="error-msg" style="margin:1rem">语法分析失败：${esc(e.message)}</div></div>`;
+      }
+    }
+
+    function renderGrammar(data, lang) {
+      const gs = $('grammarSection');
+      const gd = GENDER_LANGS[lang] || null;
+
+      const gItems = (data.grammar || []).map(g => `
+    <div class="grammar-item">
+      <div class="gi-term">${esc(g.point)}</div>
+      <div class="gi-desc">${esc(g.explanation)}</div>
+      ${g.example ? `<div class="gi-ex">${esc(g.example)}</div>` : ''}
+    </div>`).join('');
+
+      const vItems = (data.vocabulary || []).map(v => {
+        let badge = '';
+        if (gd && v.gender && v.gender !== 'none') {
+          const lbl = gd[v.gender] || v.gender;
+          const cls = v.gender === 'm' ? 'gb-m' : v.gender === 'f' ? 'gb-f' : 'gb-n';
+          badge = `<span class="gender-badge ${cls}">${esc(lbl)}</span>`;
+        }
+        return `<div class="vocab-item">
+      <div class="vocab-top"><span class="vocab-word">${esc(v.word)}</span>${badge}<span class="vocab-pos">${esc(v.pos || '')}</span></div>
+      <div class="vocab-def">${esc(v.definition)}</div>
+    </div>`;
+      }).join('');
+
+      const vocabTitle = gd ? `重点词汇 <span style="font-size:9px;font-weight:400;color:var(--text3)">(含词性别)</span>` : '重点词汇';
+      gs.innerHTML = `
+    <div class="section-card grammar-card">
+      <div class="section-card-header" onclick="toggleSection('grammarBody','grammarArrow')">
+        <div class="section-card-icon grammar-icon">📚</div>
+        <div class="section-card-title">语法要点 · 重点词汇</div>
+        <span class="section-card-arrow open" id="grammarArrow">▼</span>
+      </div>
+      <div class="section-card-body" id="grammarBody">
+        <div class="grammar-section">
+          <div class="gs-title">语法要点</div>
+          <div class="grammar-list">${gItems || noData}</div>
+        </div>
+        <div class="grammar-section">
+          <div class="gs-title">${vocabTitle}</div>
+          <div class="vocab-grid">${vItems || noData}</div>
+        </div>
+      </div>
+    </div>`;
+    }
+    const noData = '<div style="color:var(--text3);font-size:12px">暂无</div>';
+
+    // ─── Quiz ───
+    async function doQuiz(lang, native, article) {
+      const qs = $('quizSection');
+      const compQ = Math.ceil(quizCount / 2);
+      const gramQ = quizCount - compQ;
+      const quizMaxTok = Math.max(1500, 300 + quizCount * 220);
+      qs.innerHTML = `<div class="loading-placeholder"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><span style="margin-left:12px;color:var(--text3);font-size:17px">正在生成 ${quizCount} 道测验题目…</span></div>`;
+      try {
+        const raw = await callAPI(
+          [{ role: 'user', content: `Based on this ${lang} article at CEFR ${currentLevel}, create exactly ${quizCount} quiz questions (${compQ} comprehension + ${gramQ} vocabulary/grammar).\n\nIMPORTANT: Write ALL questions and ALL answer options in ${lang} (the target language being studied). Write ONLY the explanation field in ${native}.\n\nArticle:\n${article}\n\nReturn ONLY this JSON:\n{"questions":[{"question":"question in ${lang}","options":["A. option in ${lang}","B. option in ${lang}","C. option in ${lang}","D. option in ${lang}"],"correct":0,"explanation":"explanation in ${native}"}]}\ncorrect is 0-based index.` }],
+          `Language quiz creator. Return ONLY valid JSON.`,
+          false, null, quizMaxTok, true, '测验生成'
+        );
+        quizData = await parseOrRepairJSON(raw);
+        renderQuiz(quizData);
+      } catch (e) {
+        qs.innerHTML = `<div class="quiz-card"><div class="error-msg">测验生成失败：${esc(e.message)}</div></div>`;
+      }
+    }
+
+    function renderQuiz(data) {
+      const qs = $('quizSection');
+      const questions = data.questions || [];
+      let h = `<div class="section-card quiz-card">
+    <div class="section-card-header" onclick="toggleSection('quizBody','quizArrow')">
+      <div class="section-card-icon" style="background:var(--amber-bg);font-size:14px">📝</div>
+      <div class="section-card-title">理解测验</div>
+      <div class="quiz-score" id="quizScore" style="display:none"></div>
+      <span class="section-card-arrow open" id="quizArrow">▼</span>
+    </div>
+    <div class="section-card-body quiz-card-inner" id="quizBody">
+      <p class="quiz-sub" style="margin-bottom:1rem">选择正确答案</p>
+      <div class="questions">`;
+      questions.forEach((q, qi) => {
+        h += `<div class="question-item" id="q${qi}"><div class="question-text">${qi + 1}. ${esc(q.question)}</div><div class="options">`;
+        q.options.forEach((opt, oi) => { h += `<button class="option-btn" id="q${qi}o${oi}" onclick="pickOpt(${qi},${oi})">${esc(opt)}</button>`; });
+        h += `</div><div class="explanation" id="exp${qi}">${esc(q.explanation || '')}</div></div>`;
+      });
+      h += `</div>
+      <div style="margin-top:1rem">
+        <button class="btn-submit" id="submitQ" onclick="submitQuiz()">提交答案</button>
+        <button class="btn-submit" id="retryQ" style="display:none;margin-left:8px" onclick="resetQuiz()">重新作答</button>
+      </div>
+    </div>
+  </div>`;
+      qs.innerHTML = h;
+    }
+
+    const picked = {}; let submitted = false;
+    function pickOpt(qi, oi) {
+      if (submitted) return;
+      // clear any previously highlighted option in this question
+      quizData.questions[qi].options.forEach((_, i) => {
+        const b = $(`q${qi}o${i}`); b.style.background = b.style.borderColor = b.style.color = '';
+      });
+      // toggle off if clicking the already-selected option
+      if (picked[qi] === oi) {
+        delete picked[qi];
+        return;
+      }
+      picked[qi] = oi;
+      const b = $(`q${qi}o${oi}`);
+      b.style.background = 'var(--accent-bg)'; b.style.borderColor = 'var(--accent)'; b.style.color = 'var(--accent2)';
+    }
+    function submitQuiz() {
+      if (!quizData) return;
+      submitted = true;
+      let ok = 0;
+      quizData.questions.forEach((q, qi) => {
+        const ch = picked[qi];
+        q.options.forEach((_, oi) => {
+          const b = $(`q${qi}o${oi}`);
+          b.disabled = true; b.style.background = b.style.borderColor = b.style.color = '';
+          if (oi === q.correct) b.classList.add('correct');
+          else if (oi === ch && ch !== q.correct) b.classList.add('wrong');
+        });
+        if (ch === q.correct) ok++;
+        $(`exp${qi}`).classList.add('show');
+      });
+      const sc = $('quizScore'), pct = Math.round(ok / quizData.questions.length * 100);
+      sc.style.display = 'block';
+      sc.style.color = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
+      sc.textContent = `${ok}/${quizData.questions.length} 正确 (${pct}%)`;
+      $('submitQ').style.display = 'none'; $('retryQ').style.display = 'inline-block';
+    }
+    function resetQuiz() { submitted = false; Object.keys(picked).forEach(k => delete picked[k]); renderQuiz(quizData); }
+
+    // ─── Clickable words ───
+    function makeWords(text, lang) {
+      return text.replace(/([^\s\p{P}]+)/gu, m => `<span class="word" data-word="${escA(m)}">${esc(m)}</span>`);
+    }
+    function setupWordHover() { setupWordHoverIn($('articleText')); }
+    function setupWordHoverIn(container) {
+      container.addEventListener('mouseover', e => {
+        if (!wordModeOn) return;
+        const w = e.target.closest('.word'); if (!w) return;
+        clearTimeout(tooltipTimer);
+        tooltipTimer = setTimeout(() => showTip(w), 650);
+      });
+      container.addEventListener('mouseout', e => {
+        if (!e.target.closest('.word')) return;
+        clearTimeout(tooltipTimer); tooltipTimer = setTimeout(hideTip, 380);
+      });
+    }
+
+    async function showTip(el) {
+      const word = el.dataset.word;
+      // Read lang/native from the article container, not the sidebar dropdowns
+      const articleEl = $('articleText');
+      const lang = articleEl.dataset.lang || $('targetLang').value;
+      const native = articleEl.dataset.native || $('nativeLang').value;
+      const cacheKey = `${lang}::${word}`;
+      const rect = el.getBoundingClientRect();
+      const tt = $('tooltip');
+      $('ttWord').textContent = word;
+      $('ttPos').textContent = ''; $('ttDef').textContent = '';
+      const tg = $('ttGender'); tg.textContent = ''; tg.className = 'gender-badge gb-hide';
+      $('ttLoading').textContent = '查询中…';
+      tt.style.top = (rect.bottom + 6) + 'px';
+      tt.style.left = Math.min(rect.left, window.innerWidth - 255) + 'px';
+      tt.classList.add('show');
+
+      if (tooltipCache[cacheKey]) { applyTip(tooltipCache[cacheKey], lang); return; }
+      try {
+        if (!getKey()) { $('ttLoading').textContent = '需要 API Key'; return; }
+        const gNote = isGendered(lang) ? `If the word is a noun, set "gender" to "m","f", or "n". Otherwise "none".` : `Set "gender":"none".`;
+        const raw = await callAPI(
+          [{ role: 'user', content: `Define the ${lang} word: "${word}"\n${gNote}\nReturn ONLY JSON: {"pos":"${native} part of speech","gender":"m|f|n|none","definition":"brief meaning in ${native}","example":"short ${lang} example"}` }],
+          `${lang} vocabulary definer for ${native} speakers. ONLY JSON.`,
+          false, null, 300, false, `词汇:${word}`
+        );
+        const result = await parseOrRepairJSON(raw);
+        tooltipCache[cacheKey] = result;
+        applyTip(result, lang);
+      } catch { $('ttLoading').textContent = '查询失败'; }
+    }
+    function applyTip(d, lang) {
+      $('ttPos').textContent = d.pos || '';
+      $('ttDef').textContent = (d.definition || '') + (d.example ? '\n例: ' + d.example : '');
+      $('ttLoading').textContent = '';
+      const gd = GENDER_LANGS[lang];
+      const tg = $('ttGender');
+      if (gd && d.gender && d.gender !== 'none') {
+        const lbl = gd[d.gender] || d.gender;
+        tg.textContent = lbl;
+        tg.className = 'gender-badge ' + (d.gender === 'm' ? 'gb-m' : d.gender === 'f' ? 'gb-f' : 'gb-n');
+      }
+    }
+    function hideTip() { $('tooltip').classList.remove('show'); }
+
+    // ─── View ───
+    let currentSentencePairs = [];
+
+    function buildParallelHTML(pairs, lang, native) {
+      if (!pairs || !pairs.length) return `<div style="color:var(--text3);font-size:12px;padding:1.2rem">逐句数据不可用（旧版历史记录无此格式）</div>`;
+      const rows = pairs.map(p => `
+    <div class="parallel-pair">
+      <div class="parallel-cell src">${makeWords(p.src || '', lang)}</div>
+      <div class="parallel-cell tgt">${esc(p.tgt || '')}</div>
+    </div>`).join('');
+      return `
+    <div class="parallel-header">
+      <div class="parallel-header-cell">${esc(lang)} 原文</div>
+      <div class="parallel-header-cell">${esc(native)} 译文</div>
+    </div>
+    <div class="parallel-body">${rows}</div>`;
+    }
+
+    function setView(mode) {
+      const card = $('articleCard');
+      const body = $('articleBody');
+      if (!card || !body) return;  // no article generated yet
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      const btns = document.querySelectorAll('.view-btn');
+
+      // Always remove parallel overlay if switching away
+      const existing = card.querySelector('.parallel-overlay');
+      if (existing) existing.remove();
+      body.style.display = '';
+
+      if (mode === 'both') {
+        body.className = 'article-body';
+        body.children[0].style.display = '';
+        body.children[1].style.display = '';
+        btns[1].classList.add('active');
+
+      } else if (mode === 'article') {
+        body.className = 'article-body single';
+        body.children[0].style.display = '';
+        body.children[1].style.display = 'none';
+        btns[0].classList.add('active');
+
+      } else if (mode === 'parallel') {
+        // Hide the two-panel body, inject a full-width parallel overlay
+        body.style.display = 'none';
+        const aEl = $('articleText');
+        const lang = aEl ? aEl.dataset.lang || '' : '';
+        const native = aEl ? aEl.dataset.native || '' : '';
+        const overlay = document.createElement('div');
+        overlay.className = 'parallel-overlay';
+        overlay.innerHTML = buildParallelHTML(currentSentencePairs, lang, native);
+        card.appendChild(overlay);
+        setupWordHoverIn(overlay);
+        btns[2].classList.add('active');
+      }
+    }
+
+    // ─── History ───
+    function loadHist() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); } catch { return []; } }
+    function saveHist(entry) {
+      const h = loadHist(); h.unshift(entry); if (h.length > 40) h.length = 40;
+      localStorage.setItem(HIST_KEY, JSON.stringify(h));
+    }
+    function openHistory() {
+      const h = loadHist();
+      $('histList').innerHTML = h.length
+        ? h.map((item, i) => `
+      <div class="hist-item" id="histitem${i}">
+        <div class="hist-item-badges" onclick="loadHistItem(${i})" style="cursor:pointer">
+          <span class="meta-badge badge-level" style="font-size:9px">${esc(item.level)}</span>
+          <span class="meta-badge badge-lang" style="font-size:9px">${esc(item.lang)}</span>
+          <span class="meta-badge badge-style" style="font-size:9px">${esc(item.style)}</span>
+          ${item.model ? `<span class="meta-badge" style="font-size:9px;background:var(--bg3);color:var(--text2)">${esc(item.model)}</span>` : ''}
+        </div>
+        <div class="hist-item-preview" onclick="loadHistItem(${i})" style="cursor:pointer">${esc(item.article.slice(0, 90))}…</div>
+        <div class="hist-item-date" onclick="loadHistItem(${i})" style="cursor:pointer">${esc(item.date)}</div>
+        <button class="hist-del-btn" onclick="deleteHistItem(event,${i})" title="删除">✕</button>
+      </div>`).join('')
+        : '<div class="hist-empty">还没有历史记录</div>';
+      $('histOverlay').classList.add('show');
+    }
+    function closeHistory() { $('histOverlay').classList.remove('show'); }
+    function histOverlayClick(e) { if (e.target === $('histOverlay')) closeHistory(); }
+    function clearHistory() { if (confirm('确定清空所有历史记录？')) { localStorage.removeItem(HIST_KEY); closeHistory(); } }
+
+    // ─── New article: reset to welcome state ───
+    function newArticle() {
+      closeHistory();
+      articleContent = '';
+      quizData = null;
+      grammarData = null;
+      currentSentencePairs = [];
+      submitted = false;
+      Object.keys(picked).forEach(k => delete picked[k]);
+      const main = $('main');
+      main.className = '';
+      main.innerHTML = `
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">📖</div>
+          <h2>配置好语言设置，开始学习</h2>
+          <p>AI 将生成适合你水平的短文，提供译文对照、词汇释义、语法分析和测验题目。</p>
+        </div>`;
+      updateCardState(false);
+    }
+    function deleteHistItem(e, i) {
+      e.stopPropagation();
+      const h = loadHist();
+      h.splice(i, 1);
+      localStorage.setItem(HIST_KEY, JSON.stringify(h));
+      openHistory(); // re-render the list
+    }
+    function loadHistItem(i) {
+      const h = loadHist()[i]; if (!h) return;
+      closeHistory();
+      articleContent = h.article; quizData = h.quizData; grammarData = h.grammarData;
+      currentSentencePairs = h.sentencePairs || [];
+      $('main').innerHTML = `
+    <div class="article-card" id="articleCard">
+      <div class="article-meta">
+        <span class="meta-badge badge-level">${esc(h.level)}</span>
+        <span class="meta-badge badge-lang">${esc(h.lang)}</span>
+        <span class="meta-badge badge-style">${esc(h.style)}</span>
+        <div class="view-toggle" id="viewToggle">
+          <button class="view-btn active" onclick="setView('article')">原文</button>
+          <button class="view-btn" onclick="setView('both')">双栏</button>
+          <button class="view-btn" onclick="setView('parallel')">逐句</button>
+        </div>
+      </div>
+      <div class="article-body single" id="articleBody">
+        <div class="text-panel">
+          <div class="panel-label">${esc(h.lang)} 原文</div>
+          <div class="article-text${wordModeOn ? ' word-mode-on' : ''}" id="articleText" data-lang="${esc(h.lang)}" data-native="${esc(h.native)}">${makeWords(h.article, h.lang)}</div>
+        </div>
+        <div class="text-panel" style="display:none">
+          <div class="panel-label">${esc(h.native)} 译文</div>
+          <div class="translation-text">${esc(h.translation || '')}</div>
+        </div>
+      </div>
+    </div>
+    <div id="quizSection"></div>
+    <div id="grammarSection"></div>`;
+      setupWordHover();
+      if (h.grammarData) renderGrammar(h.grammarData, h.lang);
+      if (h.quizData) { quizData = h.quizData; submitted = false; Object.keys(picked).forEach(k => delete picked[k]); renderQuiz(h.quizData); }
+      switchView('article');
+      updateCardState(true);
+    }
+
+    function showError(msg) {
+      // Toast notification — appears at top, auto-dismisses
+      const existing = document.querySelector('.toast-error');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.className = 'toast-error';
+      toast.innerHTML = `<span class="toast-icon">⚠</span><span class="toast-msg">${esc(msg)}</span><button class="toast-close" aria-label="关闭">✕</button>`;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add('show'));
+      const dismiss = () => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 280);
+      };
+      toast.querySelector('.toast-close').addEventListener('click', dismiss);
+      setTimeout(dismiss, 5000);
+    }
+
+    // ─── Mode (study / focus) ───
+    let currentMode = 'focus';
+    function setMode(mode) {
+      currentMode = mode;
+      const isFocus = mode === 'focus';
+
+      // body class
+      document.body.classList.toggle('focus-mode', isFocus);
+
+      // button active states
+      $('modeStudyBtn').className = 'mode-btn' + (isFocus ? '' : ' active');
+      $('modeFocusBtn').className = 'mode-btn' + (isFocus ? ' focus-active active' : '');
+
+      // word hover toggle — force off in focus, restore in study
+      const toggle = $('wordModeToggle');
+      if (isFocus) {
+        toggle.checked = false;
+        updateWordMode();
+      } else {
+        toggle.checked = true;
+        updateWordMode();
+      }
+
+      // Disable grammar card in focus mode; re-enable in study (if article exists)
+      const grammarCard = $('tcGrammar');
+      if (grammarCard) grammarCard.classList.toggle('disabled', isFocus || !articleContent);
+
+      // In focus mode: if grammar view is active, switch back to article
+      if (isFocus) {
+        const main = $('main');
+        if (main && main.classList.contains('mid-view-grammar')) {
+          switchView('article');
+        } else if ($('articleBody')) {
+          setView('article');
+        }
+      }
+    }
+    // Apply focus mode on page load
+    document.addEventListener('DOMContentLoaded', () => setMode('focus'));
+
+    // ─── Collapsible sections ───
+    function toggleSection(bodyId, arrowId) {
+      const body = document.getElementById(bodyId);
+      const arrow = document.getElementById(arrowId);
+      if (!body) return;
+      body.classList.toggle('collapsed');
+      if (arrow) arrow.classList.toggle('open');
+    }
+
+    // ─── Debug 模块 ───
+    let debugVisible = false;
+    function debugAppend(label, raw) {
+      const ts = new Date().toLocaleTimeString('zh-CN');
+      debugLog.push({ ts, label, raw });
+      const panel = $('debugPanel');
+      if (!panel) return;
+      const id = 'dbgb' + debugLog.length;
+      const entry = document.createElement('div');
+      entry.className = 'dbg-entry';
+      entry.innerHTML =
+        `<div class="dbg-hdr" onclick="var b=document.getElementById('${id}'),a=this.querySelector('.dbg-arr');b.classList.toggle('open');a.classList.toggle('open')">` +
+        `<span class="dbg-lbl">${esc(label)}</span>` +
+        `<span class="dbg-ts">${ts}</span>` +
+        `<span class="dbg-len">${raw.length} 字符</span>` +
+        `<span class="dbg-arr">▶</span>` +
+        `</div>` +
+        `<div class="dbg-body" id="${id}"><pre class="dbg-raw">${esc(raw)}</pre></div>`;
+      panel.appendChild(entry);
+      if (debugVisible) panel.scrollTop = panel.scrollHeight;
+    }
+    function toggleDebug() {
+      debugVisible = !debugVisible;
+      const wrap = $('debugWrap');
+      const btn = $('debugToggleBtn');
+      if (wrap) wrap.style.display = debugVisible ? 'block' : 'none';
+      if (btn) btn.style.background = debugVisible ? 'var(--accent-bg)' : '';
+    }
+    function clearDebug() {
+      debugLog.length = 0;
+      const panel = $('debugPanel');
+      if (panel) panel.innerHTML = '';
+    }
+
+    // ─── 初始化供应商/模型 ───
+    setProvider(currentProvider);
+
+    // ─── API key panel ───
+    function toggleApiKey() {
+      toggleRightPanel('apiKeyDropdown', 'tcApiKey');
+    }
+
+    // ─── Theme ───
+    let themeColor = 'blue';   // 'blue' | 'purple'
+    let themeMode = 'dark';    // 'dark' | 'light'
+
+    function applyTheme() {
+      const html = document.documentElement;
+      html.classList.toggle('light', themeMode === 'light');
+      html.classList.toggle('theme-blue', themeColor === 'blue');
+      html.classList.toggle('theme-purple', themeColor === 'purple');
+      localStorage.setItem('linguaai_theme', themeMode);
+      localStorage.setItem('linguaai_color', themeColor);
+      const darkBtn = $('modeDarkBtn'), lightBtn = $('modeLightBtn');
+      if (darkBtn) darkBtn.classList.toggle('active', themeMode === 'dark');
+      if (lightBtn) lightBtn.classList.toggle('active', themeMode === 'light');
+    }
+
+    function setAppearance(mode) { themeMode = mode; applyTheme(); }
+    function setThemeColor(color) { themeColor = color; applyTheme(); }
+    function toggleThemePanel() { toggleRightPanel('themePanelDropdown', 'tcTheme'); }
+
+    // init from localStorage
+    (function initTheme() {
+      themeMode = localStorage.getItem('linguaai_theme') || 'dark';
+      themeColor = localStorage.getItem('linguaai_color') || 'blue';
+      window.addEventListener('DOMContentLoaded', applyTheme);
+    })();
+
+    // legacy toggleTheme kept for safety
+    function toggleTheme() { setAppearance(themeMode === 'dark' ? 'light' : 'dark'); }
+
+    // ─── Left column collapse ───
+    let leftOpen = true;
+    function toggleLeft() {
+      leftOpen = !leftOpen;
+      $('colLeft').classList.toggle('collapsed', !leftOpen);
+      $('collapseBtn').textContent = leftOpen ? '‹' : '›';
+    }
+
+    // ─── Right column collapse ───
+    let rightOpen = true;
+    function toggleRight() {
+      rightOpen = !rightOpen;
+      $('colRight').classList.toggle('collapsed', !rightOpen);
+      $('collapseRightBtn').textContent = rightOpen ? '›' : '‹';
+    }
+
+    // ─── View switching (article / quiz / grammar) ───
+    function switchView(view) {
+      const main = $('main');
+      if (!main) return;
+      main.classList.remove('mid-view-article', 'mid-view-quiz', 'mid-view-grammar');
+      main.classList.add('mid-view-' + view);
+      // Update card active states
+      const map = { article: 'tcArticle', quiz: 'tcQuiz', grammar: 'tcGrammar' };
+      ['tcArticle', 'tcQuiz', 'tcGrammar'].forEach(id => {
+        const el = $(id); if (el) el.classList.remove('tc-active');
+      });
+      const activeCard = $(map[view]);
+      if (activeCard) activeCard.classList.add('tc-active');
+    }
+
+    // ─── Card state (enable/disable first 3 content cards) ───
+    function updateCardState(hasContent) {
+      ['tcArticle', 'tcQuiz'].forEach(id => {
+        const el = $(id);
+        if (el) el.classList.toggle('disabled', !hasContent);
+      });
+      // Grammar is also disabled in focus mode
+      const grammarCard = $('tcGrammar');
+      if (grammarCard) grammarCard.classList.toggle('disabled', !hasContent || currentMode === 'focus');
+      const fab = $('genFab');
+      if (fab) fab.style.display = hasContent ? 'none' : 'flex';
+    }
+
+    // ─── Right panel toggle ───
+    function toggleRightPanel(panelId, cardId) {
+      const panel = $(panelId);
+      if (!panel) return;
+      const isOpen = panel.classList.contains('open');
+      document.querySelectorAll('.right-panel').forEach(p => p.classList.remove('open'));
+      ['tcTheme', 'tcApiKey'].forEach(id => { const el = $(id); if (el) el.classList.remove('tc-active'); });
+      if (!isOpen) {
+        panel.classList.add('open');
+        const card = $(cardId);
+        if (card) card.classList.add('tc-active');
+      }
+    }
+  </script>
+
+  <!-- Debug 面板 -->
+  <div id="debugWrap" style="display:none;position:fixed;inset:0;z-index:9999">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.65)" onclick="toggleDebug()"></div>
+    <div
+      style="position:absolute;top:32px;left:50%;transform:translateX(-50%);width:min(860px,96vw);height:calc(100vh - 64px);background:#16161e;border-radius:12px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #3a3a5c;box-shadow:0 24px 64px rgba(0,0,0,.6)">
+      <div
+        style="display:flex;align-items:center;padding:10px 16px;background:#1e1e2c;border-bottom:1px solid #3a3a5c;gap:10px;flex-shrink:0">
+        <span style="font:700 12px/1 monospace;color:#7c7cf8;letter-spacing:.06em">DEBUG</span>
+        <span style="font-size:12px;color:#aaa">原始模型回复</span>
+        <span style="font-size:11px;color:#555;margin-left:4px">· 点击条目展开 · 点击背景关闭</span>
+        <button onclick="clearDebug()"
+          style="margin-left:auto;font-size:11px;padding:3px 12px;border:1px solid #444;background:#2a2a3c;color:#ccc;border-radius:5px;cursor:pointer">清空</button>
+        <button onclick="toggleDebug()"
+          style="font-size:11px;padding:3px 12px;border:1px solid #444;background:#2a2a3c;color:#ccc;border-radius:5px;cursor:pointer">✕
+          关闭</button>
+      </div>
+      <div id="debugPanel" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+      </div>
+    </div>
+  </div>
+  <style>
+    .dbg-entry {
+      border: 1px solid #2e2e40;
+      border-radius: 7px;
+      overflow: hidden;
+      font-family: monospace
+    }
+
+    .dbg-hdr {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #1e1e2c;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .dbg-hdr:hover {
+      background: #252535
+    }
+
+    .dbg-lbl {
+      font-size: 12px;
+      font-weight: 600;
+      color: #9090e8
+    }
+
+    .dbg-ts {
+      font-size: 11px;
+      color: #666
+    }
+
+    .dbg-len {
+      font-size: 11px;
+      color: #555;
+      margin-left: auto;
+      padding-right: 6px
+    }
+
+    .dbg-arr {
+      font-size: 10px;
+      color: #555;
+      transition: transform .2s
+    }
+
+    .dbg-arr.open {
+      transform: rotate(90deg)
+    }
+
+    .dbg-body {
+      display: none;
+      border-top: 1px solid #2a2a3c
+    }
+
+    .dbg-body.open {
+      display: block
+    }
+
+    .dbg-raw {
+      margin: 0;
+      padding: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #d4d4d8;
+      white-space: pre-wrap;
+      word-break: break-all;
+      background: #0f0f17;
+      max-height: 60vh;
+      overflow-y: auto
+    }
+  </style>
+</body>
+
+</html>
