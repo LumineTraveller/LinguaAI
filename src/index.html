@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinguaAI · 智能语言学习</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/reading.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOP BAR
+       ═══════════════════════════════════════ -->
+  <div class="top-bar">
+    <div class="logo">Lingua<span>AI</span></div>
+    <div class="top-bar-right">
+      <div class="mode-toggle">
+        <button class="mode-btn focus-active active" id="modeFocusBtn" onclick="setMode('focus')">专注模式</button>
+        <button class="mode-btn" id="modeStudyBtn" onclick="setMode('study')">学习模式</button>
+      </div>
+      <div class="word-toggle">
+        <span class="wt-label">悬停释义</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="wordModeToggle" checked onchange="updateWordMode()">
+          <div class="tog-track"></div>
+          <div class="tog-thumb"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       THREE-COLUMN LAYOUT
+       ═══════════════════════════════════════ -->
+  <div class="three-col" id="threecol">
+
+    <!-- ── LEFT COLUMN: params ── -->
+    <div class="col col-left" id="colLeft">
+      <div class="col-hdr">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--text3)">设置</span>
+        <button class="col-collapse-btn" id="collapseBtn" onclick="toggleLeft()" title="收起">‹</button>
+      </div>
+      <div class="col-body">
+        <div class="aside-inner">
+
+          <div class="field-group">
+            <div class="field-label">学习语言</div>
+            <div class="custom-select" id="targetLangSelect" data-target="targetLang" data-callback="onLangChange">
+              <div class="cs-header" onclick="toggleCS(event, 'targetLangSelect')">
+                <span class="cs-header-text">德语 German</span>
+                <span class="cs-arrow">▼</span>
+              </div>
+              <div class="cs-list">
+                <div class="cs-option active" data-value="German" onclick="selectCS('targetLangSelect', this)">德语 German
+                </div>
+                <div class="cs-option" data-value="French" onclick="selectCS('targetLangSelect', this)">法语 French</div>
+                <div class="cs-option" data-value="Spanish" onclick="selectCS('targetLangSelect', this)">西班牙语 Spanish
+                </div>
+                <div class="cs-option" data-value="Italian" onclick="selectCS('targetLangSelect', this)">意大利语 Italian
+                </div>
+                <div class="cs-option" data-value="Japanese" onclick="selectCS('targetLangSelect', this)">日语 Japanese
+                </div>
+                <div class="cs-option" data-value="Korean" onclick="selectCS('targetLangSelect', this)">韩语 Korean</div>
+                <div class="cs-option" data-value="Portuguese" onclick="selectCS('targetLangSelect', this)">葡萄牙语
+                  Portuguese</div>
+                <div class="cs-option" data-value="Russian" onclick="selectCS('targetLangSelect', this)">俄语 Russian
+                </div>
+                <div class="cs-option" data-value="Arabic" onclick="selectCS('targetLangSelect', this)">阿拉伯语 Arabic
+                </div>
+                <div class="cs-option" data-value="Dutch" onclick="selectCS('targetLangSelect', this)">荷兰语 Dutch</div>
+                <div class="cs-option" data-value="English" onclick="selectCS('targetLangSelect', this)">英语 English
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="targetLang" value="German">
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">译文语言</div>
+            <div class="custom-select" id="nativeLangSelect" data-target="nativeLang">
+              <div class="cs-header" onclick="toggleCS(event, 'nativeLangSelect')">
+                <span class="cs-header-text">中文</span>
+                <span class="cs-arrow">▼</span>
+              </div>
+              <div class="cs-list">
+                <div class="cs-option active" data-value="Chinese" onclick="selectCS('nativeLangSelect', this)">中文</div>
+                <div class="cs-option" data-value="English" onclick="selectCS('nativeLangSelect', this)">英文</div>
+              </div>
+            </div>
+            <input type="hidden" id="nativeLang" value="Chinese">
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">难度等级</div>
+            <div class="level-grid">
+              <div class="level-btn" data-level="A1">A1</div>
+              <div class="level-btn" data-level="A2">A2</div>
+              <div class="level-btn active" data-level="B1">B1</div>
+              <div class="level-btn" data-level="B2">B2</div>
+              <div class="level-btn" data-level="C1">C1</div>
+              <div class="level-btn" data-level="C2">C2</div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">文章风格</div>
+            <div class="style-dropdown" id="styleDropdown">
+              <div class="style-header" id="styleHeader" onclick="toggleStyleList()">
+                <span class="style-header-text" id="styleHeaderText">日常生活</span>
+                <span class="style-arrow">▼</span>
+              </div>
+              <div class="style-list" id="styleList">
+                <div class="style-option active" data-style="日常生活" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>日常生活</div>
+                <div class="style-option" data-style="旅行游记" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>旅行游记</div>
+                <div class="style-option" data-style="美食文化" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>美食文化</div>
+                <div class="style-option" data-style="历史故事" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>历史故事</div>
+                <div class="style-option" data-style="科技话题" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>科技话题</div>
+                <div class="style-option" data-style="自然环境" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>自然环境</div>
+                <div class="style-option" data-style="文学诗歌" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>文学诗歌</div>
+                <div class="style-option" data-style="新闻报道" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>新闻报道</div>
+                <div class="style-option" data-style="商务职场" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>商务职场</div>
+                <div class="style-option" data-style="儿童故事" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>儿童故事</div>
+                <div class="style-option" data-style="custom" onclick="selectStyle(this)"><span
+                    class="s-check">✓</span>其他（自定义）</div>
+                <div class="style-custom-row" id="styleCustomRow" style="display:none">
+                  <input type="text" id="styleCustomInput" placeholder="输入自定义风格…" oninput="onCustomStyle()">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">指定题材（可选）</div>
+            <textarea id="customTopic" placeholder="例如：在巴黎咖啡馆的一个早晨…"></textarea>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">文章长度</div>
+            <div class="length-slider-wrap">
+              <div class="length-slider-top">
+                <span style="font-size:11px;color:var(--text3)">目标词数</span>
+                <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
+                  onchange="onLengthChange()" onblur="onLengthChange()">
+              </div>
+              <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
+                oninput="updateLengthLabel()">
+              <div class="length-range">
+                <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">题目数量</div>
+            <div class="quiz-count-row">
+              <button class="quiz-count-btn" id="quizCountDec" onclick="changeQuizCount(-1)">−</button>
+              <div class="quiz-count-display">
+                <span id="quizCountVal">4</span>
+                <span class="quiz-count-sub">道题目</span>
+              </div>
+              <button class="quiz-count-btn" id="quizCountInc" onclick="changeQuizCount(1)">+</button>
+            </div>
+            <div class="quiz-warn" id="quizWarn">
+              <span class="quiz-warn-icon">⚠</span>
+              <span id="quizWarnText"></span>
+            </div>
+          </div>
+
+        </div><!-- end aside-inner -->
+      </div><!-- end col-body -->
+    </div><!-- end col-left -->
+
+    <!-- ── MIDDLE COLUMN: content area ── -->
+    <div class="col col-mid" id="colMid">
+      <div class="col-body mid-content">
+        <div id="main">
+          <div class="welcome" id="welcome">
+            <div class="welcome-icon">📖</div>
+            <h2>配置好语言设置，开始学习</h2>
+            <p>AI 将生成适合你水平的短文，提供译文对照、词汇释义、语法分析和测验题目。</p>
+          </div>
+        </div>
+      </div>
+      <div class="gen-fab" id="genFab">
+        <button class="btn-generate" id="generateBtn" onclick="generateArticle()">
+          <svg class="spin-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5">
+            <path
+              d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+          </svg>
+          生成文章
+        </button>
+      </div>
+    </div><!-- end col-mid -->
+
+    <!-- ── RIGHT COLUMN: tool cards + inline panels ── -->
+    <div class="col col-right" id="colRight">
+      <div class="col-hdr">
+        <button class="col-collapse-btn" id="collapseRightBtn" onclick="toggleRight()" title="收起">›</button>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--text3)">工具</span>
+      </div>
+      <div class="col-body">
+        <div class="tool-grid">
+          <div class="tool-card tc-article disabled" id="tcArticle" onclick="switchView('article')">
+            <div class="tc-icon">≡</div>
+            <div class="tc-label">文章</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-quiz disabled" id="tcQuiz" onclick="switchView('quiz')">
+            <div class="tc-icon">✎</div>
+            <div class="tc-label">题目</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-grammar disabled" id="tcGrammar" onclick="switchView('grammar')">
+            <div class="tc-icon">Ω</div>
+            <div class="tc-label">语法和单词</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-history" id="tcHistory" onclick="openHistory()">
+            <div class="tc-icon">↺</div>
+            <div class="tc-label">历史文章</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-theme" id="tcTheme" onclick="toggleThemePanel()">
+            <div class="tc-icon">◈</div>
+            <div class="tc-label">主题</div>
+            <div class="tc-arrow">›</div>
+          </div>
+          <div class="tool-card tc-apikey" id="tcApiKey" onclick="toggleApiKey()">
+            <div class="tc-icon">⌘</div>
+            <div class="tc-label">API Key</div>
+            <div class="tc-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- API Key inline panel -->
+        <div class="right-panel" id="apiKeyDropdown">
+          <div class="api-field-row">
+            <label>模型</label>
+            <select id="apiModelSelect" class="api-model-select" onchange="setModel(this.value)"></select>
+          </div>
+          <div class="api-field-row">
+            <label id="apiKeyLabel">Key</label>
+            <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" oninput="saveKey()">
+          </div>
+          <div class="api-field-row" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div class="api-status" id="apiStatus"></div>
+              <span style="font-size:11px;color:var(--text3)">DeepSeek</span>
+            </div>
+            <button class="api-provider-btn active" onclick="toggleDebug()" id="debugToggleBtn"
+              style="flex:none;padding:3px 10px">Debug</button>
+          </div>
+        </div>
+
+        <!-- Theme inline panel -->
+        <div class="right-panel" id="themePanelDropdown">
+          <div style="font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.04em;margin-bottom:2px">明暗模式
+          </div>
+          <div class="theme-mode-row">
+            <button class="theme-opt-btn active" id="modeDarkBtn" onclick="setAppearance('dark')">🌙 暗色</button>
+            <button class="theme-opt-btn" id="modeLightBtn" onclick="setAppearance('light')">☀️ 亮色</button>
+          </div>
+        </div>
+
+      </div><!-- end col-body -->
+    </div><!-- end col-right -->
+
+  </div><!-- end three-col -->
+
+  <!-- Tooltip -->
+  <div class="tooltip" id="tooltip">
+    <div class="tt-word-row">
+      <span class="tt-word" id="ttWord"></span>
+      <span class="gender-badge gb-hide" id="ttGender"></span>
+    </div>
+    <div class="tt-pos" id="ttPos"></div>
+    <div class="tt-def" id="ttDef"></div>
+    <div class="tt-loading" id="ttLoading"></div>
+  </div>
+
+  <!-- History overlay -->
+  <div class="hist-overlay" id="histOverlay" onclick="histOverlayClick(event)">
+    <div class="hist-panel">
+      <div class="hist-hdr">
+        <span class="hist-hdr-title">历史文章</span>
+        <button class="hist-close" onclick="closeHistory()">✕</button>
+      </div>
+      <button class="hist-new-btn" onclick="newArticle()">
+        <span class="hist-new-icon">+</span>
+        <span>新建文章</span>
+      </button>
+      <div class="hist-list" id="histList"></div>
+      <button class="hist-clear-btn" onclick="clearHistory()">清空全部历史</button>
+    </div>
+  </div>
+
+  <!-- Debug panel -->
+  <div id="debugWrap" style="display:none;position:fixed;inset:0;z-index:9999">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,.65)" onclick="toggleDebug()"></div>
+    <div
+      style="position:absolute;top:32px;left:50%;transform:translateX(-50%);width:min(860px,96vw);height:calc(100vh - 64px);background:#16161e;border-radius:12px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #3a3a5c;box-shadow:0 24px 64px rgba(0,0,0,.6)">
+      <div
+        style="display:flex;align-items:center;padding:10px 16px;background:#1e1e2c;border-bottom:1px solid #3a3a5c;gap:10px;flex-shrink:0">
+        <span style="font:700 12px/1 monospace;color:#7c7cf8;letter-spacing:.06em">DEBUG</span>
+        <span style="font-size:12px;color:#aaa">原始模型回复</span>
+        <span style="font-size:11px;color:#555;margin-left:4px">· 点击条目展开 · 点击背景关闭</span>
+        <button onclick="clearDebug()"
+          style="margin-left:auto;font-size:11px;padding:3px 12px;border:1px solid #444;background:#2a2a3c;color:#ccc;border-radius:5px;cursor:pointer">清空</button>
+        <button onclick="toggleDebug()"
+          style="font-size:11px;padding:3px 12px;border:1px solid #444;background:#2a2a3c;color:#ccc;border-radius:5px;cursor:pointer">✕
+          关闭</button>
+      </div>
+      <div id="debugPanel" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+      </div>
+    </div>
+  </div>
+
+  <!-- JS in dependency order -->
+  <script src="js/api.js"></script>
+  <script src="js/grammar.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/article.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+
+</html>
