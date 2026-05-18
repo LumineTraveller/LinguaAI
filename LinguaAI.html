@@ -18,14 +18,17 @@
     :root {
       --aside-w: 280px;
       --header-h: 56px;
-      --transition: 0.22s ease;
+      --transition: 0.2s ease;
       --font-ui: 'DM Sans', 'Helvetica Neue', system-ui, sans-serif;
       --font-read: 'Crimson Pro', 'Source Serif Pro', Georgia, serif;
 
-      --r-sm: 6px;
-      --r-md: 8px;
-      --r-lg: 12px;
-      --r-xl: 16px;
+      /* MD3 Shape scale */
+      --r-xs:  4px;
+      --r-sm:  8px;
+      --r-md:  12px;
+      --r-lg:  16px;
+      --r-xl:  28px;
+      --r-full: 9999px;
 
       /* semantic status colors — theme-agnostic */
       --green: #4ade80;
@@ -40,94 +43,154 @@
       --blue-bg: rgba(127, 179, 227, 0.10);
     }
 
-    /* ══ DARK · INDIGO (default) ══ */
+    /* ══ DARK · BLUE (default) — MD3 ══ */
     :root,
     html.theme-blue {
-      --bg: #1a1c21;
-      --bg2: #22252b;
-      --bg3: #2a2d34;
-      --surface: #34373f;
-      --surface2: #40434c;
-      --border: rgba(255, 255, 255, 0.06);
-      --border2: rgba(255, 255, 255, 0.12);
-      --text: #e6e8ee;
-      --text2: #9097a8;
-      --text3: #5d6376;
-      --accent: #8a9cff;
-      --accent2: #aab8ff;
-      --accent-bg: rgba(138, 156, 255, 0.12);
-      --amber: #8a9cff;
-      --amber-bg: rgba(138, 156, 255, 0.10);
-      --blue: #7fb3e3;
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
-      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+      --bg:      #131416;
+      --bg2:     #1b1c1f;
+      --bg3:     #1f2024;
+      --surface: #2a2b2f;
+      --surface2:#353638;
+
+      --border:  rgba(255,255,255,0.05);
+      --border2: rgba(255,255,255,0.11);
+
+      --text:    #e2e2e6;
+      --text2:   #c4c6cf;
+      --text3:   #8e9099;
+
+      --accent:  #a8c7fa;
+      --accent2: #c5deff;
+      --accent-bg: rgba(168,199,250,0.12);
+
+      --primary-container: #2d5da8;
+      --on-primary-container: #d6e3ff;
+
+      --secondary-container: #3e4759;
+      --on-secondary-container: #dae2f9;
+
+      --amber:    #a8c7fa;
+      --amber-bg: rgba(168,199,250,0.10);
+      --blue:     #a8c7fa;
+
+      --shadow-md: 0 1px 3px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.15);
+      --shadow-lg: 0 2px 6px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.2);
+
+      --state-hover:  rgba(226,226,230,0.08);
+      --state-press:  rgba(226,226,230,0.12);
+      --state-focus:  rgba(168,199,250,0.12);
     }
 
-    /* ══ LIGHT · INDIGO ══ */
+    /* ══ LIGHT · BLUE — MD3 ══ */
     html.light.theme-blue,
     html.theme-blue.light {
-      --bg: #fafaf8;
-      --bg2: #ffffff;
-      --bg3: #f4f4f1;
-      --surface: #ececea;
-      --surface2: #dfdfdd;
-      --border: rgba(20, 22, 30, 0.08);
-      --border2: rgba(20, 22, 30, 0.16);
-      --text: #181a1f;
-      --text2: #5a6072;
-      --text3: #8e94a3;
-      --accent: #4c5fd8;
-      --accent2: #3a4dc4;
-      --accent-bg: rgba(76, 95, 216, 0.09);
-      --amber: #4c5fd8;
-      --amber-bg: rgba(76, 95, 216, 0.08);
-      --blue: #2563a8;
-      --shadow-md: 0 4px 14px rgba(20, 22, 30, 0.06);
-      --shadow-lg: 0 16px 42px rgba(20, 22, 30, 0.10);
+      --bg:      #f5f8ff;
+      --bg2:     #ffffff;
+      --bg3:     #eef1fa;
+      --surface: #e4e8f5;
+      --surface2:#d8dcef;
+
+      --border:  rgba(20,22,40,0.07);
+      --border2: rgba(20,22,40,0.13);
+
+      --text:    #191c22;
+      --text2:   #44474f;
+      --text3:   #74777f;
+
+      --accent:  #3a5bc7;
+      --accent2: #1e3a8a;
+      --accent-bg: rgba(58,91,199,0.09);
+
+      --primary-container: #d6e3ff;
+      --on-primary-container: #001b3d;
+
+      --secondary-container: #dae2f9;
+      --on-secondary-container: #131c2c;
+
+      --amber:    #3a5bc7;
+      --amber-bg: rgba(58,91,199,0.08);
+      --blue:     #1a56c4;
+
+      --shadow-md: 0 1px 2px rgba(20,22,40,0.06), 0 4px 10px rgba(20,22,40,0.07);
+      --shadow-lg: 0 2px 4px rgba(20,22,40,0.05), 0 8px 20px rgba(20,22,40,0.09);
+
+      --state-hover:  rgba(25,28,34,0.08);
+      --state-press:  rgba(25,28,34,0.12);
+      --state-focus:  rgba(58,91,199,0.10);
     }
 
-    /* ══ DARK · VIOLET ══ */
+    /* ══ DARK · VIOLET — MD3 ══ */
     html.theme-purple {
-      --bg: #1a1c21;
-      --bg2: #22252b;
-      --bg3: #2a2d34;
-      --surface: #34373f;
-      --surface2: #40434c;
-      --border: rgba(255, 255, 255, 0.06);
-      --border2: rgba(255, 255, 255, 0.12);
-      --text: #ecebf0;
-      --text2: #9a93a8;
-      --text3: #615a73;
-      --accent: #b48dff;
-      --accent2: #c9aaff;
-      --accent-bg: rgba(180, 141, 255, 0.12);
-      --amber: #b48dff;
-      --amber-bg: rgba(180, 141, 255, 0.10);
-      --blue: #7fb3e3;
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
-      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.45);
+      --bg:      #141218;
+      --bg2:     #1d1b20;
+      --bg3:     #211f26;
+      --surface: #2b2930;
+      --surface2:#36343b;
+
+      --border:  rgba(255,255,255,0.05);
+      --border2: rgba(255,255,255,0.11);
+
+      --text:    #e6e0e9;
+      --text2:   #cac4d0;
+      --text3:   #938f99;
+
+      --accent:  #d0bcff;
+      --accent2: #ecdcff;
+      --accent-bg: rgba(208,188,255,0.12);
+
+      --primary-container: #4f378b;
+      --on-primary-container: #ecdcff;
+
+      --secondary-container: #4a4458;
+      --on-secondary-container: #e8def8;
+
+      --amber:    #d0bcff;
+      --amber-bg: rgba(208,188,255,0.10);
+      --blue:     #a8c7fa;
+
+      --shadow-md: 0 1px 3px rgba(0,0,0,0.35), 0 4px 8px rgba(0,0,0,0.2);
+      --shadow-lg: 0 2px 6px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.25);
+
+      --state-hover:  rgba(230,224,233,0.08);
+      --state-press:  rgba(230,224,233,0.12);
+      --state-focus:  rgba(208,188,255,0.12);
     }
 
-    /* ══ LIGHT · VIOLET ══ */
+    /* ══ LIGHT · VIOLET — MD3 ══ */
     html.theme-purple.light {
-      --bg: #faf9fb;
-      --bg2: #ffffff;
-      --bg3: #f3f1f6;
-      --surface: #ebe9ef;
-      --surface2: #ddd9e4;
-      --border: rgba(20, 18, 30, 0.08);
-      --border2: rgba(20, 18, 30, 0.16);
-      --text: #1b181f;
-      --text2: #5c5670;
-      --text3: #8e88a0;
-      --accent: #7a4fd6;
-      --accent2: #643cc0;
-      --accent-bg: rgba(122, 79, 214, 0.09);
-      --amber: #7a4fd6;
-      --amber-bg: rgba(122, 79, 214, 0.08);
-      --blue: #2563a8;
-      --shadow-md: 0 4px 14px rgba(20, 18, 30, 0.06);
-      --shadow-lg: 0 16px 42px rgba(20, 18, 30, 0.10);
+      --bg:      #fffbfe;
+      --bg2:     #ffffff;
+      --bg3:     #f3eeff;
+      --surface: #e8e0f0;
+      --surface2:#ddd5e8;
+
+      --border:  rgba(20,18,30,0.07);
+      --border2: rgba(20,18,30,0.13);
+
+      --text:    #1c1b1f;
+      --text2:   #49454f;
+      --text3:   #79747e;
+
+      --accent:  #6750a4;
+      --accent2: #4f378b;
+      --accent-bg: rgba(103,80,164,0.09);
+
+      --primary-container: #ecdcff;
+      --on-primary-container: #21005d;
+
+      --secondary-container: #e8def8;
+      --on-secondary-container: #1d192b;
+
+      --amber:    #6750a4;
+      --amber-bg: rgba(103,80,164,0.08);
+      --blue:     #1a56c4;
+
+      --shadow-md: 0 1px 2px rgba(20,18,30,0.06), 0 4px 10px rgba(20,18,30,0.07);
+      --shadow-lg: 0 2px 4px rgba(20,18,30,0.05), 0 8px 20px rgba(20,18,30,0.09);
+
+      --state-hover:  rgba(28,27,31,0.08);
+      --state-press:  rgba(28,27,31,0.12);
+      --state-focus:  rgba(103,80,164,0.10);
     }
 
     * {
@@ -164,7 +227,7 @@
        ════════════════════════════════════ */
     header {
       background: var(--bg2);
-      border-bottom: 1px solid var(--border);
+      border-bottom: none;
       padding: 0 1.25rem;
       display: flex;
       align-items: center;
@@ -188,10 +251,10 @@
 
     .logo {
       font-family: var(--font-ui);
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 500;
       color: var(--text);
-      letter-spacing: -0.015em;
+      letter-spacing: 0;
       white-space: nowrap;
       padding-right: 0.5rem;
       flex-shrink: 0;
@@ -202,7 +265,7 @@
       font-weight: 600;
     }
 
-    /* generic small pill button used across the header */
+    /* generic small pill button used across the header — MD3 tonal button */
     .btn-hist {
       background: transparent;
       border: 1px solid var(--border2);
@@ -210,65 +273,63 @@
       font-family: var(--font-ui);
       font-size: 12px;
       font-weight: 500;
-      padding: 6px 11px;
-      border-radius: var(--r-md);
+      padding: 6px 14px;
+      border-radius: var(--r-full);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       white-space: nowrap;
       transition: var(--transition);
-      height: 30px;
+      height: auto;
     }
 
     .btn-hist:hover {
-      border-color: var(--text2);
+      background: var(--state-hover);
+      border-color: var(--accent);
       color: var(--text);
-      background: var(--bg3);
     }
 
-    /* mode toggle (focus / study) */
+    /* mode toggle — MD3 Segmented Button */
     .mode-toggle {
-      display: inline-flex;
-      align-items: center;
+      display: flex;
       background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
+      border-radius: var(--r-full);
       padding: 3px;
       gap: 2px;
-      height: 30px;
+      height: auto;
       flex-shrink: 0;
+      border: none;
     }
 
     .mode-btn {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 0 12px;
-      height: 22px;
+      padding: 6px 16px;
+      border-radius: var(--r-full);
       border: none;
-      background: none;
+      background: transparent;
       color: var(--text2);
-      cursor: pointer;
-      border-radius: 5px;
-      transition: var(--transition);
+      font-size: 13px;
+      font-weight: 500;
       font-family: var(--font-ui);
+      cursor: pointer;
+      transition: var(--transition);
       white-space: nowrap;
     }
 
     .mode-btn:hover {
+      background: var(--state-hover);
       color: var(--text);
     }
 
     .mode-btn.active {
-      background: var(--bg2);
-      color: var(--text);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      font-weight: 600;
     }
 
     .mode-btn.focus-active {
-      background: var(--accent-bg);
-      color: var(--accent);
-      box-shadow: none;
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
     }
 
     /* hover-translate toggle */
@@ -352,17 +413,17 @@
       align-items: center;
       gap: 7px;
       cursor: pointer;
-      padding: 0 11px;
-      height: 30px;
-      border-radius: var(--r-md);
+      padding: 6px 14px;
+      height: auto;
+      border-radius: var(--r-full);
       background: transparent;
       border: 1px solid var(--border2);
       transition: var(--transition);
     }
 
     .api-key-trigger:hover {
-      border-color: var(--text2);
-      background: var(--bg3);
+      background: var(--state-hover);
+      border-color: var(--accent);
     }
 
     .api-key-trigger-label {
@@ -390,8 +451,8 @@
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      background: var(--bg2);
-      border: 1px solid var(--border2);
+      background: var(--surface);
+      border: none;
       border-radius: var(--r-lg);
       padding: 14px 16px;
       display: flex;
@@ -425,7 +486,7 @@
       border: 1px solid var(--border2);
       background: transparent;
       color: var(--text2);
-      border-radius: var(--r-sm);
+      border-radius: var(--r-full);
       cursor: pointer;
       font-family: var(--font-ui);
       transition: var(--transition);
@@ -434,15 +495,15 @@
     }
 
     .api-provider-btn:hover {
-      border-color: var(--text2);
+      background: var(--state-hover);
+      border-color: var(--accent);
       color: var(--text);
-      background: var(--bg3);
     }
 
     .api-provider-btn.active {
-      background: var(--accent-bg);
-      border-color: var(--accent);
-      color: var(--accent);
+      background: var(--secondary-container);
+      border-color: transparent;
+      color: var(--on-secondary-container);
     }
 
     .api-field-row {
@@ -507,7 +568,7 @@
     body {
       height: 100vh;
       overflow: hidden;
-      padding: 0 24px 16px;
+      padding: 0 20px 16px;
       /* top handled by .top-bar */
       display: flex;
       flex-direction: column;
@@ -516,7 +577,7 @@
 
     /* ── Top bar ── */
     .top-bar {
-      height: 60px;
+      height: 64px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -541,16 +602,16 @@
     .three-col {
       flex: 1;
       display: flex;
-      gap: 16px;
+      gap: 12px;
       min-height: 0;
       overflow: hidden;
     }
 
-    /* ── Generic column card ── */
+    /* ── Generic column card — MD3 tonal surface ── */
     .col {
       background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      border: none;
+      border-radius: var(--r-xl);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -561,8 +622,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px 10px;
-      border-bottom: 1px solid var(--border);
+      padding: 14px 16px 10px;
+      border-bottom: none;
       flex-shrink: 0;
     }
 
@@ -586,23 +647,23 @@
 
     .col-collapse-btn {
       background: none;
-      border: 1px solid var(--border2);
+      border: none;
       color: var(--text3);
-      width: 22px;
-      height: 22px;
-      border-radius: var(--r-sm);
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-full);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 14px;
       flex-shrink: 0;
       line-height: 1;
       transition: var(--transition);
     }
 
     .col-collapse-btn:hover {
-      background: var(--bg3);
+      background: var(--state-hover);
       color: var(--text);
     }
 
@@ -616,16 +677,17 @@
     .left-section {
       background: var(--bg3);
       border-radius: var(--r-lg);
-      padding: 12px 14px 14px;
+      padding: 14px 16px 16px;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      border: none;
     }
 
     .left-section-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .09em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
       color: var(--text3);
       text-transform: uppercase;
     }
@@ -691,7 +753,8 @@
 
     /* Thin-strip state: hide body + label, center the toggle button */
     .col-left.collapsed .col-body,
-    .col-right.collapsed .col-body {
+    .col-right.collapsed .col-body,
+    .col-right.collapsed .col-footer {
       display: none;
     }
 
@@ -710,25 +773,26 @@
     .tool-grid {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: 10px 12px;
+      gap: 2px;
+      padding: 8px;
     }
 
     .tool-card {
-      border-radius: 10px;
-      padding: 16px 14px;
+      border-radius: var(--r-md);
+      padding: 14px 16px;
       cursor: pointer;
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       transition: var(--transition);
       user-select: none;
-      border: 1px solid transparent;
+      border: none;
+      background: transparent;
     }
 
     .tool-card:hover:not(.disabled) {
-      filter: brightness(1.12);
+      background: var(--state-hover);
     }
 
     .tool-card.disabled {
@@ -737,74 +801,51 @@
       pointer-events: none;
     }
 
-    .tool-card.tc-active {
-      outline: 2px solid var(--tc-c, var(--accent));
-      outline-offset: -1px;
+    /* Grammar card in focus mode: keep pointer-events so title tooltip fires */
+    #tcGrammar.disabled {
+      pointer-events: auto;
     }
 
+    .tool-card.tc-active {
+      background: var(--accent-bg);
+    }
+
+    /* MD3: neutral base, icon/label colored only */
+    .tc-article  { background: transparent; border-color: transparent; --tc-c: #8aa0cc; }
+    .tc-quiz     { background: transparent; border-color: transparent; --tc-c: #c49368; }
+    .tc-grammar  { background: transparent; border-color: transparent; --tc-c: #6aaa8c; }
+    .tc-history  { background: transparent; border-color: transparent; --tc-c: #a89850; }
+    .tc-theme    { background: transparent; border-color: transparent; --tc-c: #9a8ec8; }
+    .tc-apikey   { background: transparent; border-color: transparent; --tc-c: #c47aa4; }
+
     .tc-icon {
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1;
       flex-shrink: 0;
+      color: var(--tc-c, var(--text2));
     }
 
     .tc-label {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
-      color: var(--tc-c, var(--text2));
+      color: var(--text);
       line-height: 1;
       flex: 1;
     }
 
     .tc-arrow {
-      font-size: 13px;
-      color: var(--tc-c, var(--text3));
-      opacity: 0.6;
+      font-size: 14px;
+      color: var(--text3);
+      opacity: 0.5;
       flex-shrink: 0;
     }
 
-    .tc-article {
-      background: rgba(138, 160, 204, .22);
-      border-color: rgba(138, 160, 204, .38);
-      --tc-c: #8aa0cc;
-    }
-
-    .tc-quiz {
-      background: rgba(196, 147, 104, .22);
-      border-color: rgba(196, 147, 104, .38);
-      --tc-c: #c49368;
-    }
-
-    .tc-grammar {
-      background: rgba(106, 170, 140, .22);
-      border-color: rgba(106, 170, 140, .38);
-      --tc-c: #6aaa8c;
-    }
-
-    .tc-history {
-      background: rgba(168, 152, 80, .08);
-      border-color: rgba(168, 152, 80, .16);
-      --tc-c: #a89850;
-    }
-
-    .tc-theme {
-      background: rgba(154, 142, 200, .08);
-      border-color: rgba(154, 142, 200, .16);
-      --tc-c: #9a8ec8;
-    }
-
-    .tc-apikey {
-      background: rgba(196, 122, 164, .08);
-      border-color: rgba(196, 122, 164, .16);
-      --tc-c: #c47aa4;
-    }
-
-    /* Right-column inline panels */
+    /* Right-column inline panels — MD3 */
     .right-panel {
-      margin: 0 12px 12px;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 10px;
+      margin: 0 8px 8px;
+      background: var(--bg3);
+      border: none;
+      border-radius: var(--r-lg);
       padding: 12px;
       display: none;
       flex-direction: column;
@@ -863,10 +904,10 @@
     /* Generate FAB button */
     .gen-fab .btn-generate {
       width: auto;
-      min-width: 140px;
-      padding: 10px 28px;
-      border-radius: 24px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, .3), 0 0 0 1px rgba(255, 255, 255, .06);
+      min-width: 160px;
+      padding: 14px 28px;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
     }
 
     /* ════════════════════════════════════
@@ -879,22 +920,23 @@
     }
 
     .field-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text2);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .02em;
+      color: var(--text3);
+      margin-bottom: 6px;
       text-transform: none;
     }
 
     select,
     textarea {
-      background: var(--bg);
+      background: var(--bg3);
       border: 1px solid var(--border2);
       color: var(--text);
       font-family: var(--font-ui);
       font-size: 13px;
       padding: 8px 11px;
-      border-radius: var(--r-md);
+      border-radius: var(--r-sm);
       width: 100%;
       transition: border-color 0.2s;
       appearance: none;
@@ -931,63 +973,57 @@
       color: var(--text3);
     }
 
-    /* Level grid — segmented control with sliding pill */
+    /* Level grid — MD3 Filter Chips */
     .level-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 0;
-      background: var(--bg);
-      border: 1px solid var(--border2);
-      border-radius: var(--r-md);
-      padding: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
       position: relative;
       --level-index: 2;
       /* B1 by default */
     }
 
-    /* Sliding background pill */
+    /* No sliding pill in MD3 chip style */
     .level-grid::before {
-      content: '';
-      position: absolute;
-      top: 3px;
-      bottom: 3px;
-      left: 3px;
-      width: calc((100% - 6px) / 6);
-      background: var(--bg2);
-      border-radius: 5px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-      transform: translateX(calc(var(--level-index) * 100%));
-      transition: transform 0.34s cubic-bezier(0.32, 0.72, 0, 1);
-      z-index: 0;
-      pointer-events: none;
+      content: none;
     }
 
     .level-btn {
       position: relative;
       z-index: 1;
+      padding: 6px 16px;
+      border-radius: var(--r-full);
+      border: 1px solid var(--border2);
       background: transparent;
-      border: none;
       color: var(--text2);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 0;
-      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-ui);
       cursor: pointer;
-      text-align: center;
-      transition: color 0.2s ease;
-      letter-spacing: 0.02em;
+      transition: var(--transition);
+      user-select: none;
     }
 
     .level-btn:hover {
+      background: var(--state-hover);
+      border-color: var(--accent);
       color: var(--text);
     }
 
     .level-btn.active {
-      color: var(--accent);
+      background: var(--secondary-container);
+      border-color: transparent;
+      color: var(--on-secondary-container);
+      font-weight: 600;
     }
 
     .level-btn.active:hover {
-      color: var(--accent);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
     }
 
     /* Custom select (for 学习语言 / 译文语言) — same drop animation as style-list */
@@ -999,10 +1035,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg);
+      background: var(--bg3);
       border: 1px solid var(--border2);
-      padding: 8px 11px;
-      border-radius: var(--r-md);
+      padding: 9px 12px;
+      border-radius: var(--r-sm);
       cursor: pointer;
       transition: border-color 0.15s;
       user-select: none;
@@ -1036,8 +1072,8 @@
     }
 
     .cs-list {
-      background: var(--bg2);
-      border: 1px solid var(--accent);
+      background: var(--surface);
+      border: 1px solid var(--border2);
       border-top: none;
       border-bottom-left-radius: var(--r-md);
       border-bottom-right-radius: var(--r-md);
@@ -1094,10 +1130,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg);
+      background: var(--bg3);
       border: 1px solid var(--border2);
-      padding: 8px 11px;
-      border-radius: var(--r-md);
+      padding: 9px 12px;
+      border-radius: var(--r-sm);
       cursor: pointer;
       transition: var(--transition);
       user-select: none;
@@ -1129,8 +1165,8 @@
     }
 
     .style-list {
-      background: var(--bg2);
-      border: 1px solid var(--accent);
+      background: var(--surface);
+      border: 1px solid var(--border2);
       border-top: none;
       border-bottom-left-radius: var(--r-md);
       border-bottom-right-radius: var(--r-md);
@@ -1240,7 +1276,7 @@
       color: var(--accent);
       background: var(--accent-bg);
       padding: 2px 9px;
-      border-radius: 5px;
+      border-radius: var(--r-full);
       min-width: 56px;
       text-align: center;
     }
@@ -1318,12 +1354,12 @@
     }
 
     .quiz-count-btn {
-      width: 30px;
-      height: 30px;
-      background: var(--bg);
+      width: 32px;
+      height: 32px;
+      background: transparent;
       border: 1px solid var(--border2);
       color: var(--text2);
-      border-radius: var(--r-sm);
+      border-radius: var(--r-full);
       cursor: pointer;
       font-size: 15px;
       line-height: 1;
@@ -1351,8 +1387,8 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text);
-      background: var(--bg);
-      border: 1px solid var(--border2);
+      background: var(--bg3);
+      border: none;
       border-radius: var(--r-sm);
       padding: 4px 0;
       line-height: 1.35;
@@ -1397,40 +1433,40 @@
       margin-top: 1px;
     }
 
-    /* Generate button */
+    /* Generate button — MD3 Extended FAB */
     .btn-generate {
       width: 100%;
-      background: var(--accent);
-      color: #fff;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
       border: none;
       font-family: var(--font-ui);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
-      padding: 11px;
-      border-radius: var(--r-md);
+      padding: 14px 28px;
+      border-radius: var(--r-lg);
       cursor: pointer;
       transition: var(--transition);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      letter-spacing: 0.01em;
+      gap: 10px;
+      letter-spacing: .02em;
+      box-shadow: var(--shadow-md);
+      min-width: 160px;
     }
 
-    .btn-generate:hover {
-      background: var(--accent2);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    .btn-generate:hover:not(:disabled) {
+      filter: brightness(1.08);
+      box-shadow: var(--shadow-lg);
     }
 
     .btn-generate:active {
-      transform: translateY(0);
+      filter: brightness(0.96);
     }
 
     .btn-generate:disabled {
-      opacity: 0.55;
+      opacity: 0.5;
       cursor: not-allowed;
-      transform: none;
       box-shadow: none;
     }
 
@@ -1453,39 +1489,38 @@
        MAIN — WELCOME + ARTICLE
        ════════════════════════════════════ */
     .welcome {
+      min-height: 55vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.9rem;
-      color: var(--text3);
+      gap: 1rem;
       text-align: center;
-      padding: 2rem 0;
+      padding: 2rem;
+      color: var(--text2);
     }
 
     .welcome-icon {
-      font-size: 2.25rem;
-      margin-bottom: 0.4rem;
-      opacity: 0.7;
+      font-size: 40px;
     }
 
     .welcome h2 {
-      font-size: 1.05rem;
+      font-size: 22px;
+      font-weight: 400;
       color: var(--text);
-      font-weight: 500;
-      letter-spacing: -0.01em;
+      letter-spacing: -.01em;
     }
 
     .welcome p {
-      font-size: 13px;
-      max-width: 340px;
-      line-height: 1.75;
+      font-size: 14px;
+      max-width: 360px;
+      line-height: 1.6;
       color: var(--text2);
     }
 
     .article-card {
       background: var(--bg2);
-      border: 1px solid var(--border);
+      border: none;
       border-radius: var(--r-xl);
       overflow: hidden;
     }
@@ -1497,75 +1532,82 @@
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
+      background: var(--bg3);
     }
 
+    /* MD3 Assist Chips */
     .meta-badge {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.04em;
-      border: 1px solid transparent;
-      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: var(--r-full);
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid var(--border2);
+      background: transparent;
+      letter-spacing: .02em;
     }
 
     .badge-level {
-      background: var(--accent-bg);
       color: var(--accent);
-      border-color: transparent;
+      border-color: rgba(168,199,250,0.3);
+      background: var(--accent-bg);
+    }
+
+    html.theme-purple .badge-level {
+      border-color: rgba(208,188,255,0.3);
     }
 
     .badge-lang {
-      background: var(--teal-bg);
-      color: var(--teal);
+      color: var(--text2);
+      background: transparent;
     }
 
     html.light .badge-lang {
-      color: #0a8870;
-      background: rgba(94, 234, 212, 0.15);
+      color: var(--text2);
+      background: transparent;
     }
 
     .badge-style {
-      background: rgba(251, 146, 60, 0.13);
-      color: #fb923c;
-      border-color: var(--border2);
+      color: var(--text2);
+      background: transparent;
     }
 
     html.light .badge-style {
-      background: rgba(194, 65, 12, 0.09);
-      color: #c2410c;
+      color: var(--text2);
+      background: transparent;
     }
 
+    /* MD3 Segmented Button */
     .view-toggle {
       display: flex;
       background: var(--bg3);
-      border-radius: var(--r-sm);
-      padding: 2px;
-      gap: 1px;
+      border-radius: var(--r-full);
+      padding: 3px;
+      gap: 2px;
       margin-left: auto;
+      border: none;
     }
 
     .view-btn {
-      font-size: 11px;
-      font-weight: 500;
-      padding: 4px 11px;
+      padding: 5px 14px;
+      border-radius: var(--r-full);
       border: none;
-      background: none;
-      color: var(--text3);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
       cursor: pointer;
-      border-radius: 4px;
       transition: var(--transition);
       font-family: var(--font-ui);
     }
 
-    .view-btn:hover {
+    .view-btn:hover:not(.active) {
+      background: var(--state-hover);
       color: var(--text);
     }
 
     .view-btn.active {
-      background: var(--bg2);
-      color: var(--text);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
     }
 
     .article-body {
@@ -1644,7 +1686,7 @@
        ════════════════════════════════════ */
     .section-card {
       background: var(--bg2);
-      border: 1px solid var(--border);
+      border: none;
       border-radius: var(--r-xl);
       overflow: hidden;
     }
@@ -1660,13 +1702,13 @@
     }
 
     .section-card-header:hover {
-      background: var(--bg3);
+      background: var(--state-hover);
     }
 
     .section-card-icon {
       width: 28px;
       height: 28px;
-      border-radius: 7px;
+      border-radius: var(--r-sm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1741,8 +1783,8 @@
     }
 
     .grammar-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: var(--bg3);
+      border: none;
       border-radius: var(--r-md);
       padding: 13px 16px;
     }
@@ -1778,15 +1820,15 @@
     }
 
     .vocab-item {
-      background: var(--bg);
+      background: var(--bg3);
       border-radius: var(--r-md);
       padding: 13px 15px;
-      border: 1px solid var(--border);
-      transition: border-color 0.15s, transform 0.15s;
+      border: none;
+      transition: filter 0.15s, transform 0.15s;
     }
 
     .vocab-item:hover {
-      border-color: var(--border2);
+      filter: brightness(1.05);
       transform: translateY(-1px);
     }
 
@@ -1861,8 +1903,8 @@
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      background: var(--bg2);
-      border: 1px solid var(--border2);
+      background: var(--surface);
+      border: none;
       border-radius: var(--r-lg);
       padding: 14px;
       width: 200px;
@@ -1898,7 +1940,7 @@
 
     .theme-opt-btn,
     .theme-color-btn {
-      background: var(--bg);
+      background: transparent;
       border: 1px solid var(--border2);
       color: var(--text2);
       font-family: var(--font-ui);
@@ -1920,14 +1962,15 @@
 
     .theme-opt-btn.active,
     .theme-color-btn.active {
-      background: var(--accent-bg);
-      border-color: var(--accent);
-      color: var(--accent);
+      background: var(--secondary-container);
+      border-color: transparent;
+      color: var(--on-secondary-container);
     }
 
     .theme-opt-btn:hover:not(.active),
     .theme-color-btn:hover:not(.active) {
-      border-color: var(--text3);
+      background: var(--state-hover);
+      border-color: var(--accent);
       color: var(--text);
     }
 
@@ -2034,8 +2077,9 @@
       font-size: 13px;
       font-weight: 600;
       padding: 3px 10px;
-      border-radius: 20px;
-      background: var(--bg3);
+      border-radius: var(--r-full);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
     }
 
     .questions {
@@ -2045,8 +2089,8 @@
     }
 
     .question-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: var(--bg3);
+      border: none;
       border-radius: var(--r-md);
       padding: 1.1rem 1.4rem;
     }
@@ -2066,7 +2110,7 @@
     }
 
     .option-btn {
-      background: var(--bg2);
+      background: transparent;
       border: 1px solid var(--border2);
       color: var(--text2);
       font-family: var(--font-ui);
@@ -2118,30 +2162,31 @@
 
     .btn-submit {
       margin-top: 0.75rem;
-      padding: 9px 22px;
-      background: var(--accent);
+      padding: 10px 24px;
+      background: var(--primary-container);
       border: none;
-      color: #fff;
+      color: var(--on-primary-container);
       font-family: var(--font-ui);
       font-size: 13px;
       font-weight: 600;
-      border-radius: var(--r-md);
+      border-radius: var(--r-full);
       cursor: pointer;
       transition: var(--transition);
     }
 
     .btn-submit:hover {
-      background: var(--accent2);
+      filter: brightness(1.08);
     }
 
     #retryQ {
       background: transparent;
       border: 1px solid var(--border2);
       color: var(--text2);
+      border-radius: var(--r-full);
     }
 
     #retryQ:hover {
-      background: var(--bg3);
+      background: var(--state-hover);
       color: var(--text);
     }
 
@@ -2220,17 +2265,19 @@
 
     .hist-panel {
       background: var(--bg2);
-      border-left: 1px solid var(--border);
+      border-left: none;
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
       width: 360px;
       display: flex;
       flex-direction: column;
       height: 100%;
-      box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow-lg);
     }
 
     .hist-hdr {
       padding: 1rem 1.2rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: none;
+      background: var(--bg3);
       display: flex;
       align-items: center;
     }
@@ -2248,14 +2295,15 @@
       color: var(--text3);
       cursor: pointer;
       font-size: 18px;
-      padding: 2px 6px;
+      padding: 4px 8px;
       line-height: 1;
-      border-radius: 4px;
+      border-radius: var(--r-full);
+      transition: var(--transition);
     }
 
     .hist-close:hover {
       color: var(--text);
-      background: var(--bg3);
+      background: var(--state-hover);
     }
 
     .hist-list {
@@ -2272,8 +2320,8 @@
     }
 
     .hist-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: var(--bg3);
+      border: none;
       border-radius: var(--r-md);
       padding: 11px 13px;
       margin-bottom: 8px;
@@ -2284,7 +2332,7 @@
     }
 
     .hist-item:hover {
-      border-color: var(--accent);
+      background: var(--surface);
       transform: translateY(-1px);
     }
 
@@ -2319,7 +2367,7 @@
       color: var(--text2);
       font-size: 11px;
       font-weight: 500;
-      border-radius: var(--r-sm);
+      border-radius: var(--r-full);
       cursor: pointer;
       text-align: center;
       font-family: var(--font-ui);
@@ -2335,9 +2383,9 @@
     .hist-new-btn {
       margin: 0.85rem 0.75rem 0;
       padding: 10px 12px;
-      background: var(--accent);
+      background: var(--primary-container);
       border: none;
-      color: #fff;
+      color: var(--on-primary-container);
       font-size: 13px;
       font-weight: 600;
       border-radius: var(--r-md);
@@ -2351,9 +2399,8 @@
     }
 
     .hist-new-btn:hover {
-      background: var(--accent2);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      filter: brightness(1.08);
+      box-shadow: var(--shadow-md);
     }
 
     .hist-new-icon {
@@ -2365,6 +2412,31 @@
       justify-content: center;
       width: 16px;
       height: 16px;
+    }
+
+    .col-footer {
+      flex-shrink: 0;
+      padding: 8px;
+      /* no border-top in MD3 */
+    }
+
+    .col-footer-btn {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--secondary-container);
+      border: none;
+      color: var(--on-secondary-container);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: var(--transition);
+      letter-spacing: .01em;
+    }
+
+    .col-footer-btn:hover {
+      filter: brightness(1.08);
     }
 
     .hist-del-btn {
@@ -2425,7 +2497,7 @@
       font-size: 13px;
     }
 
-    /* Toast (top-center, fixed) */
+    /* Toast (top-center, fixed) — MD3 */
     .toast-error {
       position: fixed;
       top: calc(var(--header-h) + 14px);
@@ -2549,10 +2621,10 @@
       background: var(--bg);
     }
 
-    /* Scrollbars */
+    /* Scrollbars — MD3 minimal */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 4px;
+      height: 4px;
     }
 
     ::-webkit-scrollbar-track {
@@ -2561,14 +2633,11 @@
 
     ::-webkit-scrollbar-thumb {
       background: var(--border2);
-      border-radius: 4px;
-      border: 2px solid transparent;
-      background-clip: padding-box;
+      border-radius: var(--r-full);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background-color: var(--text3);
-      background-clip: padding-box;
+      background: var(--text3);
     }
 
     /* Responsive */
@@ -2594,67 +2663,138 @@
     /* ════════════════════════════════════
        SENTENCE HOVER HIGHLIGHT
        ════════════════════════════════════ */
-    .article-text .article-para { transition: opacity 0.28s ease; }
-    .article-text .sentence { border-radius: 3px; transition: background 0.25s ease; padding: 1px 0; }
-    .article-text.highlight-active .article-para:not(.para-focus) { opacity: 0.38; }
-    .article-text.highlight-active .sentence-focus { background: var(--accent-bg); }
+    .article-text .article-para {
+      transition: opacity 0.28s ease;
+      margin-bottom: 1em;
+      text-indent: 1em;
+    }
+
+    .article-text[data-lang="Japanese"] .article-para,
+    .article-text[data-lang="Korean"] .article-para {
+      text-indent: 2em;
+    }
+
+    .article-text .article-para:last-child {
+      margin-bottom: 0;
+    }
+
+    .translation-text .translation-para {
+      margin-bottom: 1em;
+      text-indent: 1em;
+    }
+
+    .translation-text .translation-para:last-child {
+      margin-bottom: 0;
+    }
+
+    .article-text .sentence {
+      border-radius: 3px;
+      transition: background 0.25s ease;
+      padding: 1px 0;
+    }
+
+    .article-text.highlight-active .article-para:not(.para-focus) {
+      opacity: 0.38;
+    }
+
+    .article-text.highlight-active .sentence-focus {
+      background: var(--accent-bg);
+    }
 
     /* ════════════════════════════════════
        SELECTION TOOLBAR
        ════════════════════════════════════ */
+    /* MD3 Selection toolbar */
     .sel-toolbar {
       position: fixed;
       z-index: 2000;
       background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--r-md);
+      border: none;
+      border-radius: var(--r-sm);
       padding: 4px 6px;
       display: flex;
       gap: 4px;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-lg);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.15s ease;
     }
-    .sel-toolbar.show { opacity: 1; pointer-events: auto; }
+
+    .sel-toolbar.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .sel-btn {
-      background: var(--bg3);
+      background: transparent;
       border: none;
+      border-radius: var(--r-sm);
       color: var(--text);
       font-size: 12px;
       font-weight: 500;
       padding: 5px 10px;
-      border-radius: var(--r-sm);
       cursor: pointer;
       font-family: var(--font-ui);
       transition: background 0.15s;
     }
-    .sel-btn:hover { background: var(--accent-bg); color: var(--accent2); }
+
+    .sel-btn:hover {
+      background: var(--state-hover);
+      color: var(--text);
+    }
 
     /* ════════════════════════════════════
        AI TUTOR PANEL
        ════════════════════════════════════ */
     .tutor-panel {
       background: var(--bg2);
-      border: 1px solid var(--border2);
+      border: none;
       border-radius: var(--r-xl);
       overflow: hidden;
     }
+
     .tutor-hdr {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 18px 10px;
       border-bottom: 1px solid var(--border);
+      background: var(--bg3);
     }
-    .tutor-hdr-left { display: flex; align-items: center; gap: 8px; }
-    .tutor-icon { font-size: 14px; color: var(--accent); }
-    .tutor-title { font-size: 13px; font-weight: 600; color: var(--text); }
+
+    .tutor-hdr-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tutor-icon {
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .tutor-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
     .tutor-close {
-      background: none; border: none; color: var(--text3); font-size: 14px;
-      cursor: pointer; padding: 2px 6px; border-radius: var(--r-sm); transition: color 0.15s;
+      background: none;
+      border: none;
+      color: var(--text3);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: var(--r-full);
+      transition: var(--transition);
     }
-    .tutor-close:hover { color: var(--text); }
+
+    .tutor-close:hover {
+      color: var(--text);
+      background: var(--state-hover);
+    }
+
     .tutor-context-box {
       margin: 12px 18px 10px;
       padding: 10px 14px;
@@ -2666,30 +2806,40 @@
       font-family: var(--font-read);
       line-height: 1.6;
     }
+
     .tutor-presets {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       padding: 0 18px 10px;
     }
+
+    /* MD3 Suggestion Chips */
     .tutor-preset-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: 1px solid var(--border2);
       color: var(--text2);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
-      padding: 5px 10px;
-      border-radius: 20px;
+      padding: 6px 14px;
+      border-radius: var(--r-full);
       cursor: pointer;
       font-family: var(--font-ui);
-      transition: all 0.15s;
+      transition: var(--transition);
     }
-    .tutor-preset-btn:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-bg); }
+
+    .tutor-preset-btn:hover {
+      background: var(--state-hover);
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
     .tutor-input-row {
       display: flex;
       gap: 8px;
       padding: 0 18px 12px;
     }
+
     .tutor-input {
       flex: 1;
       background: var(--bg3);
@@ -2697,16 +2847,20 @@
       color: var(--text);
       font-size: 13px;
       padding: 8px 12px;
-      border-radius: var(--r-md);
+      border-radius: var(--r-sm);
       font-family: var(--font-ui);
       outline: none;
       transition: border-color 0.15s;
     }
-    .tutor-input:focus { border-color: var(--accent); }
+
+    .tutor-input:focus {
+      border-color: var(--accent);
+    }
+
     .tutor-send-btn {
-      background: var(--accent-bg);
-      border: 1px solid var(--accent);
-      color: var(--accent2);
+      background: var(--primary-container);
+      border: none;
+      color: var(--on-primary-container);
       font-size: 15px;
       width: 36px;
       height: 36px;
@@ -2715,9 +2869,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s;
+      transition: var(--transition);
     }
-    .tutor-send-btn:hover { background: var(--accent); color: #fff; }
+
+    .tutor-send-btn:hover {
+      filter: brightness(1.08);
+    }
+
     .tutor-response {
       padding: 0 18px 16px;
       font-size: 14px;
@@ -2725,25 +2883,35 @@
       line-height: 1.7;
       min-height: 24px;
       font-family: var(--font-ui);
-      white-space: pre-wrap;
     }
+    .tutor-response p { margin: 0 0 .5em; }
+    .tutor-response p:last-child { margin-bottom: 0; }
+    .tutor-response h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: .8em 0 .3em; }
+    .tutor-response ul, .tutor-response ol { margin: .3em 0 .6em 1.2em; padding: 0; }
+    .tutor-response li { margin-bottom: .25em; }
+    .tutor-response strong { font-weight: 700; color: var(--text); }
+    .tutor-response em { font-style: italic; color: var(--text2); }
+    .tutor-response code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 4px; padding: 1px 5px; color: var(--accent2); }
 
     /* ════════════════════════════════════
        REWRITE PANEL
        ════════════════════════════════════ */
     .rewrite-panel {
       background: var(--bg2);
-      border: 1px solid var(--border2);
+      border: none;
       border-radius: var(--r-xl);
       overflow: hidden;
     }
+
     .rewrite-hdr {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 18px 10px;
       border-bottom: 1px solid var(--border);
+      background: var(--bg3);
     }
+
     .rewrite-original {
       margin: 12px 18px 10px;
       padding: 10px 14px;
@@ -2754,31 +2922,47 @@
       font-family: var(--font-read);
       line-height: 1.6;
     }
+
     .rewrite-options {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
       padding: 0 18px 12px;
     }
+
+    /* MD3 Filter Chips */
     .rewrite-opt-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: 1px solid var(--border2);
       color: var(--text2);
       font-size: 12px;
       font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 6px 16px;
+      border-radius: var(--r-full);
       cursor: pointer;
       font-family: var(--font-ui);
-      transition: all 0.15s;
+      transition: var(--transition);
     }
-    .rewrite-opt-btn:hover { border-color: var(--accent); color: var(--accent2); }
-    .rewrite-opt-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent2); }
+
+    .rewrite-opt-btn:hover {
+      background: var(--state-hover);
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    .rewrite-opt-btn.active {
+      background: var(--secondary-container);
+      border-color: transparent;
+      color: var(--on-secondary-container);
+      font-weight: 600;
+    }
+
     .rewrite-result {
       margin: 0 18px 16px;
       border-top: 1px solid var(--border);
       padding-top: 12px;
     }
+
     .rewrite-result-label {
       font-size: 10px;
       font-weight: 700;
@@ -2787,6 +2971,7 @@
       color: var(--text3);
       margin-bottom: 8px;
     }
+
     .rewrite-result-text {
       font-size: 15px;
       font-family: var(--font-read);
@@ -2836,143 +3021,147 @@
           <div class="left-section">
             <div class="left-section-title">阅读设置</div>
 
-          <div class="field-group">
-            <div class="field-label">学习语言</div>
-            <div class="custom-select" id="targetLangSelect" data-target="targetLang" data-callback="onLangChange">
-              <div class="cs-header" onclick="toggleCS(event, 'targetLangSelect')">
-                <span class="cs-header-text">德语 German</span>
-                <span class="cs-arrow">▼</span>
+            <div class="field-group">
+              <div class="field-label">学习语言</div>
+              <div class="custom-select" id="targetLangSelect" data-target="targetLang" data-callback="onLangChange">
+                <div class="cs-header" onclick="toggleCS(event, 'targetLangSelect')">
+                  <span class="cs-header-text">德语 German</span>
+                  <span class="cs-arrow">▼</span>
+                </div>
+                <div class="cs-list">
+                  <div class="cs-option active" data-value="German" onclick="selectCS('targetLangSelect', this)">德语
+                    German
+                  </div>
+                  <div class="cs-option" data-value="French" onclick="selectCS('targetLangSelect', this)">法语 French
+                  </div>
+                  <div class="cs-option" data-value="Spanish" onclick="selectCS('targetLangSelect', this)">西班牙语 Spanish
+                  </div>
+                  <div class="cs-option" data-value="Italian" onclick="selectCS('targetLangSelect', this)">意大利语 Italian
+                  </div>
+                  <div class="cs-option" data-value="Japanese" onclick="selectCS('targetLangSelect', this)">日语 Japanese
+                  </div>
+                  <div class="cs-option" data-value="Korean" onclick="selectCS('targetLangSelect', this)">韩语 Korean
+                  </div>
+                  <div class="cs-option" data-value="Portuguese" onclick="selectCS('targetLangSelect', this)">葡萄牙语
+                    Portuguese</div>
+                  <div class="cs-option" data-value="Russian" onclick="selectCS('targetLangSelect', this)">俄语 Russian
+                  </div>
+                  <div class="cs-option" data-value="Arabic" onclick="selectCS('targetLangSelect', this)">阿拉伯语 Arabic
+                  </div>
+                  <div class="cs-option" data-value="Dutch" onclick="selectCS('targetLangSelect', this)">荷兰语 Dutch</div>
+                  <div class="cs-option" data-value="English" onclick="selectCS('targetLangSelect', this)">英语 English
+                  </div>
+                </div>
               </div>
-              <div class="cs-list">
-                <div class="cs-option active" data-value="German" onclick="selectCS('targetLangSelect', this)">德语 German
-                </div>
-                <div class="cs-option" data-value="French" onclick="selectCS('targetLangSelect', this)">法语 French</div>
-                <div class="cs-option" data-value="Spanish" onclick="selectCS('targetLangSelect', this)">西班牙语 Spanish
-                </div>
-                <div class="cs-option" data-value="Italian" onclick="selectCS('targetLangSelect', this)">意大利语 Italian
-                </div>
-                <div class="cs-option" data-value="Japanese" onclick="selectCS('targetLangSelect', this)">日语 Japanese
-                </div>
-                <div class="cs-option" data-value="Korean" onclick="selectCS('targetLangSelect', this)">韩语 Korean</div>
-                <div class="cs-option" data-value="Portuguese" onclick="selectCS('targetLangSelect', this)">葡萄牙语
-                  Portuguese</div>
-                <div class="cs-option" data-value="Russian" onclick="selectCS('targetLangSelect', this)">俄语 Russian
-                </div>
-                <div class="cs-option" data-value="Arabic" onclick="selectCS('targetLangSelect', this)">阿拉伯语 Arabic
-                </div>
-                <div class="cs-option" data-value="Dutch" onclick="selectCS('targetLangSelect', this)">荷兰语 Dutch</div>
-                <div class="cs-option" data-value="English" onclick="selectCS('targetLangSelect', this)">英语 English
-                </div>
-              </div>
+              <input type="hidden" id="targetLang" value="German">
             </div>
-            <input type="hidden" id="targetLang" value="German">
-          </div>
 
-          <div class="field-group">
-            <div class="field-label">译文语言</div>
-            <div class="custom-select" id="nativeLangSelect" data-target="nativeLang">
-              <div class="cs-header" onclick="toggleCS(event, 'nativeLangSelect')">
-                <span class="cs-header-text">中文</span>
-                <span class="cs-arrow">▼</span>
+            <div class="field-group">
+              <div class="field-label">译文语言</div>
+              <div class="custom-select" id="nativeLangSelect" data-target="nativeLang">
+                <div class="cs-header" onclick="toggleCS(event, 'nativeLangSelect')">
+                  <span class="cs-header-text">中文</span>
+                  <span class="cs-arrow">▼</span>
+                </div>
+                <div class="cs-list">
+                  <div class="cs-option active" data-value="Chinese" onclick="selectCS('nativeLangSelect', this)">中文
+                  </div>
+                  <div class="cs-option" data-value="English" onclick="selectCS('nativeLangSelect', this)">英文</div>
+                </div>
               </div>
-              <div class="cs-list">
-                <div class="cs-option active" data-value="Chinese" onclick="selectCS('nativeLangSelect', this)">中文</div>
-                <div class="cs-option" data-value="English" onclick="selectCS('nativeLangSelect', this)">英文</div>
-              </div>
+              <input type="hidden" id="nativeLang" value="Chinese">
             </div>
-            <input type="hidden" id="nativeLang" value="Chinese">
-          </div>
 
-          <div class="field-group">
-            <div class="field-label">难度等级</div>
-            <div class="level-grid">
-              <div class="level-btn" data-level="A1">A1</div>
-              <div class="level-btn" data-level="A2">A2</div>
-              <div class="level-btn active" data-level="B1">B1</div>
-              <div class="level-btn" data-level="B2">B2</div>
-              <div class="level-btn" data-level="C1">C1</div>
-              <div class="level-btn" data-level="C2">C2</div>
+            <div class="field-group">
+              <div class="field-label">难度等级</div>
+              <div class="level-grid">
+                <div class="level-btn" data-level="A1">A1</div>
+                <div class="level-btn" data-level="A2">A2</div>
+                <div class="level-btn active" data-level="B1">B1</div>
+                <div class="level-btn" data-level="B2">B2</div>
+                <div class="level-btn" data-level="C1">C1</div>
+                <div class="level-btn" data-level="C2">C2</div>
+              </div>
             </div>
-          </div>
 
-          <div class="field-group">
-            <div class="field-label">文章长度</div>
-            <div class="length-slider-wrap">
-              <div class="length-slider-top">
-                <span style="font-size:11px;color:var(--text3)">目标词数</span>
-                <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
-                  onchange="onLengthChange()" onblur="onLengthChange()">
-              </div>
-              <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
-                oninput="updateLengthLabel()">
-              <div class="length-range">
-                <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
+            <div class="field-group">
+              <div class="field-label">文章长度</div>
+              <div class="length-slider-wrap">
+                <div class="length-slider-top">
+                  <span style="font-size:11px;color:var(--text3)">目标词数</span>
+                  <input type="number" class="length-val" id="lengthVal" min="100" max="800" value="200"
+                    onchange="onLengthChange()" onblur="onLengthChange()">
+                </div>
+                <input type="range" id="lengthSlider" min="100" max="800" step="1" value="200"
+                  oninput="updateLengthLabel()">
+                <div class="length-range">
+                  <span>100</span><span>300</span><span>500</span><span>700</span><span>800</span>
+                </div>
               </div>
             </div>
-          </div>
 
           </div><!-- end left-section 阅读设置 -->
 
           <div class="left-section">
             <div class="left-section-title">AI 风格</div>
 
-          <div class="field-group">
-            <div class="field-label">文章风格</div>
-            <div class="style-dropdown" id="styleDropdown">
-              <div class="style-header" id="styleHeader" onclick="toggleStyleList()">
-                <span class="style-header-text" id="styleHeaderText">日常生活</span>
-                <span class="style-arrow">▼</span>
-              </div>
-              <div class="style-list" id="styleList">
-                <div class="style-option active" data-style="日常生活" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>日常生活</div>
-                <div class="style-option" data-style="旅行游记" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>旅行游记</div>
-                <div class="style-option" data-style="美食文化" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>美食文化</div>
-                <div class="style-option" data-style="历史故事" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>历史故事</div>
-                <div class="style-option" data-style="科技话题" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>科技话题</div>
-                <div class="style-option" data-style="自然环境" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>自然环境</div>
-                <div class="style-option" data-style="文学诗歌" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>文学诗歌</div>
-                <div class="style-option" data-style="新闻报道" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>新闻报道</div>
-                <div class="style-option" data-style="商务职场" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>商务职场</div>
-                <div class="style-option" data-style="儿童故事" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>儿童故事</div>
-                <div class="style-option" data-style="custom" onclick="selectStyle(this)"><span
-                    class="s-check">✓</span>其他（自定义）</div>
-                <div class="style-custom-row" id="styleCustomRow" style="display:none">
-                  <input type="text" id="styleCustomInput" placeholder="输入自定义风格…" oninput="onCustomStyle()">
+            <div class="field-group">
+              <div class="field-label">文章风格</div>
+              <div class="style-dropdown" id="styleDropdown">
+                <div class="style-header" id="styleHeader" onclick="toggleStyleList()">
+                  <span class="style-header-text" id="styleHeaderText">日常生活</span>
+                  <span class="style-arrow">▼</span>
+                </div>
+                <div class="style-list" id="styleList">
+                  <div class="style-option active" data-style="日常生活" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>日常生活</div>
+                  <div class="style-option" data-style="旅行游记" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>旅行游记</div>
+                  <div class="style-option" data-style="美食文化" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>美食文化</div>
+                  <div class="style-option" data-style="历史故事" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>历史故事</div>
+                  <div class="style-option" data-style="科技话题" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>科技话题</div>
+                  <div class="style-option" data-style="自然环境" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>自然环境</div>
+                  <div class="style-option" data-style="文学诗歌" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>文学诗歌</div>
+                  <div class="style-option" data-style="新闻报道" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>新闻报道</div>
+                  <div class="style-option" data-style="商务职场" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>商务职场</div>
+                  <div class="style-option" data-style="儿童故事" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>儿童故事</div>
+                  <div class="style-option" data-style="custom" onclick="selectStyle(this)"><span
+                      class="s-check">✓</span>其他（自定义）</div>
+                  <div class="style-custom-row" id="styleCustomRow" style="display:none">
+                    <input type="text" id="styleCustomInput" placeholder="输入自定义风格…" oninput="onCustomStyle()">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="field-group">
-            <div class="field-label">指定题材（可选）</div>
-            <textarea id="customTopic" placeholder="例如：在巴黎咖啡馆的一个早晨…"></textarea>
-          </div>
+            <div class="field-group">
+              <div class="field-label">指定题材（可选）</div>
+              <textarea id="customTopic" placeholder="例如：在巴黎咖啡馆的一个早晨…"></textarea>
+            </div>
 
-          <div class="field-group">
-            <div class="field-label">题目数量</div>
-            <div class="quiz-count-row">
-              <button class="quiz-count-btn" id="quizCountDec" onclick="changeQuizCount(-1)">−</button>
-              <div class="quiz-count-display">
-                <span id="quizCountVal">4</span>
-                <span class="quiz-count-sub">道题目</span>
+            <div class="field-group">
+              <div class="field-label">题目数量</div>
+              <div class="quiz-count-row">
+                <button class="quiz-count-btn" id="quizCountDec" onclick="changeQuizCount(-1)">−</button>
+                <div class="quiz-count-display">
+                  <span id="quizCountVal">4</span>
+                  <span class="quiz-count-sub">道题目</span>
+                </div>
+                <button class="quiz-count-btn" id="quizCountInc" onclick="changeQuizCount(1)">+</button>
               </div>
-              <button class="quiz-count-btn" id="quizCountInc" onclick="changeQuizCount(1)">+</button>
+              <div class="quiz-warn" id="quizWarn">
+                <span class="quiz-warn-icon">⚠</span>
+                <span id="quizWarnText"></span>
+              </div>
             </div>
-            <div class="quiz-warn" id="quizWarn">
-              <span class="quiz-warn-icon">⚠</span>
-              <span id="quizWarnText"></span>
-            </div>
-          </div>
 
           </div><!-- end left-section AI 风格 -->
 
@@ -3013,17 +3202,17 @@
         <div class="tool-grid">
           <div class="tool-card tc-article disabled" id="tcArticle" onclick="switchView('article')">
             <div class="tc-icon">≡</div>
-            <div class="tc-label">文章</div>
+            <div class="tc-label">文章/译文</div>
             <div class="tc-arrow">›</div>
           </div>
           <div class="tool-card tc-quiz disabled" id="tcQuiz" onclick="switchView('quiz')">
-            <div class="tc-icon">✎</div>
-            <div class="tc-label">题目</div>
+            <div class="tc-icon">◇</div>
+            <div class="tc-label">题目/答案</div>
             <div class="tc-arrow">›</div>
           </div>
           <div class="tool-card tc-grammar disabled" id="tcGrammar" onclick="switchView('grammar')">
             <div class="tc-icon">Ω</div>
-            <div class="tc-label">语法和单词</div>
+            <div class="tc-label">语法/词汇</div>
             <div class="tc-arrow">›</div>
           </div>
           <div class="tool-card tc-history" id="tcHistory" onclick="openHistory()">
@@ -3033,7 +3222,7 @@
           </div>
           <div class="tool-card tc-theme" id="tcTheme" onclick="toggleThemePanel()">
             <div class="tc-icon">◈</div>
-            <div class="tc-label">主题</div>
+            <div class="tc-label">主题颜色</div>
             <div class="tc-arrow">›</div>
           </div>
           <div class="tool-card tc-apikey" id="tcApiKey" onclick="toggleApiKey()">
@@ -3074,6 +3263,9 @@
         </div>
 
       </div><!-- end col-body -->
+      <div class="col-footer">
+        <button class="col-footer-btn" onclick="newArticle()">+ 新建文章</button>
+      </div>
     </div><!-- end col-right -->
 
   </div><!-- end three-col -->
@@ -3102,10 +3294,6 @@
         <span class="hist-hdr-title">历史文章</span>
         <button class="hist-close" onclick="closeHistory()">✕</button>
       </div>
-      <button class="hist-new-btn" onclick="newArticle()">
-        <span class="hist-new-icon">+</span>
-        <span>新建文章</span>
-      </button>
       <div class="hist-list" id="histList"></div>
       <button class="hist-clear-btn" onclick="clearHistory()">清空全部历史</button>
     </div>
@@ -3206,6 +3394,37 @@
     const $ = id => document.getElementById(id);
     function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
     function escA(s) { return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
+    // ─── Mini Markdown renderer (for AI tutor responses) ───
+    function renderMd(raw) {
+      const lines = String(raw).split('\n');
+      let html = '', inUl = false, inOl = false;
+      const closeList = () => {
+        if (inUl) { html += '</ul>'; inUl = false; }
+        if (inOl) { html += '</ol>'; inOl = false; }
+      };
+      const inline = s => s
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/__(.+?)__/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/_(.+?)_/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+      for (const l of lines) {
+        const ulM = l.match(/^[\-\*]\s+(.+)/);
+        const olM = l.match(/^\d+\.\s+(.+)/);
+        const hM  = l.match(/^#{1,3}\s+(.+)/);
+        if (ulM)       { if (!inUl) { closeList(); html += '<ul>'; inUl = true; } html += `<li>${inline(ulM[1])}</li>`; }
+        else if (olM)  { if (!inOl) { closeList(); html += '<ol>'; inOl = true; } html += `<li>${inline(olM[1])}</li>`; }
+        else if (hM)   { closeList(); html += `<h4>${inline(hM[1])}</h4>`; }
+        else if (l.trim() === '') { closeList(); html += '<br>'; }
+        else           { closeList(); html += `<p>${inline(l)}</p>`; }
+      }
+      closeList();
+      return html;
+    }
+
     function getKey() {
       return localStorage.getItem(`linguaai_key_${currentProvider}`) || $('apiKey').value.trim();
     }
@@ -3499,7 +3718,7 @@
           sentencePairs = await reviseSentencePairs(sentencePairs, lang, native);
           translation = sentencePairs.map(p => p.tgt).join(' ');
           currentSentencePairs = sentencePairs;
-          tEl.innerHTML = esc(translation);
+          tEl.innerHTML = buildTranslationHTML(articleContent, sentencePairs);
         } catch {
           // fallback: plain translation
           translation = await callAPI(
@@ -3507,7 +3726,7 @@
             `Faithful ${native} translator. Output only the translation.`,
             true, (_, f) => { tEl.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 800, false, '译文兜底'
           );
-          tEl.innerHTML = esc(translation);
+          tEl.innerHTML = buildTranslationHTML(articleContent, []);
         }
 
         // 3. Quiz, then Grammar — sequentially, matching UI order
@@ -3603,8 +3822,8 @@
       qs.innerHTML = `<div class="loading-placeholder"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span><span style="margin-left:12px;color:var(--text3);font-size:17px">正在生成 ${quizCount} 道测验题目…</span></div>`;
       try {
         const raw = await callAPI(
-          [{ role: 'user', content: `Based on this ${lang} article at CEFR ${currentLevel}, create exactly ${quizCount} quiz questions (${compQ} comprehension + ${gramQ} vocabulary/grammar).\n\nIMPORTANT: Write ALL questions and ALL answer options in ${lang} (the target language being studied). Write ONLY the explanation field in ${native}.\n\nArticle:\n${article}\n\nReturn ONLY this JSON:\n{"questions":[{"question":"question in ${lang}","options":["A. option in ${lang}","B. option in ${lang}","C. option in ${lang}","D. option in ${lang}"],"correct":0,"explanation":"explanation in ${native}"}]}\ncorrect is 0-based index.` }],
-          `Language quiz creator. Return ONLY valid JSON.`,
+          [{ role: 'user', content: `Based on this ${lang} article at CEFR ${currentLevel}, create exactly ${quizCount} quiz questions (${compQ} comprehension + ${gramQ} vocabulary/grammar).\n\nSTRICT LANGUAGE RULES — follow exactly, no exceptions:\n- "question" field: MUST be written in ${lang}\n- "options" fields: MUST be written in ${lang}\n- "explanation" field: MUST be written in ${native} — this is non-negotiable, do NOT use ${lang} here under any circumstances\n\nArticle:\n${article}\n\nReturn ONLY this JSON:\n{"questions":[{"question":"question in ${lang}","options":["A. option in ${lang}","B. option in ${lang}","C. option in ${lang}","D. option in ${lang}"],"correct":0,"explanation":"explanation in ${native}"}]}\ncorrect is 0-based index.` }],
+          `You are a language quiz creator. Questions and options must be in ${lang}. Explanations must be in ${native}. Return ONLY valid JSON.`,
           false, null, quizMaxTok, true, '测验生成'
         );
         quizData = await parseOrRepairJSON(raw);
@@ -3775,6 +3994,30 @@
     // ─── View ───
     let currentSentencePairs = [];
 
+    // Group sentence-pair translations into paragraphs matching the original article structure
+    function buildTranslationHTML(articleText, pairs) {
+      if (!pairs || !pairs.length) {
+        // fallback: no pairs available, render as plain paragraphs
+        return articleText.split(/\n+/).filter(p => p.trim())
+          .map(p => `<p class="translation-para">${esc(p)}</p>`).join('');
+      }
+      const paras = articleText.split(/\n+/).filter(p => p.trim());
+      let idx = 0;
+      const html = paras.map(para => {
+        const sentCount = para.split(/(?<=[.!?。！？])\s+/).filter(s => s.trim()).length || 1;
+        const chunk = pairs.slice(idx, idx + sentCount);
+        idx += sentCount;
+        const text = chunk.map(p => p.tgt || '').join(' ').trim();
+        return text ? `<p class="translation-para">${esc(text)}</p>` : '';
+      }).filter(Boolean).join('');
+      // Append any leftover pairs (sentence count mismatch edge case)
+      if (idx < pairs.length) {
+        const rest = pairs.slice(idx).map(p => p.tgt || '').join(' ').trim();
+        if (rest) return html + `<p class="translation-para">${esc(rest)}</p>`;
+      }
+      return html;
+    }
+
     function buildParallelHTML(pairs, lang, native) {
       if (!pairs || !pairs.length) return `<div style="color:var(--text3);font-size:12px;padding:1.2rem">逐句数据不可用（旧版历史记录无此格式）</div>`;
       const rows = pairs.map(p => `
@@ -3907,7 +4150,7 @@
         </div>
         <div class="text-panel" style="display:none">
           <div class="panel-label">${esc(h.native)} 译文</div>
-          <div class="translation-text">${esc(h.translation || '')}</div>
+          <div class="translation-text">${buildTranslationHTML(h.article || '', h.sentencePairs || [])}</div>
         </div>
       </div>
     </div>
@@ -3964,7 +4207,10 @@
 
       // Disable grammar card in focus mode; re-enable in study (if article exists)
       const grammarCard = $('tcGrammar');
-      if (grammarCard) grammarCard.classList.toggle('disabled', isFocus || !articleContent);
+      if (grammarCard) {
+        grammarCard.classList.toggle('disabled', isFocus || !articleContent);
+        grammarCard.title = isFocus ? '专注模式下无法查看重点语法及词汇' : '';
+      }
 
       // In focus mode: if grammar view is active, switch back to article
       if (isFocus) {
@@ -4077,6 +4323,8 @@
     function switchView(view) {
       const main = $('main');
       if (!main) return;
+      // Block grammar view in focus mode
+      if (view === 'grammar' && $('tcGrammar')?.classList.contains('disabled')) return;
       main.classList.remove('mid-view-article', 'mid-view-quiz', 'mid-view-grammar');
       main.classList.add('mid-view-' + view);
       // Update card active states
@@ -4096,7 +4344,11 @@
       });
       // Grammar is also disabled in focus mode
       const grammarCard = $('tcGrammar');
-      if (grammarCard) grammarCard.classList.toggle('disabled', !hasContent || currentMode === 'focus');
+      if (grammarCard) {
+        const isFocus = currentMode === 'focus';
+        grammarCard.classList.toggle('disabled', !hasContent || isFocus);
+        grammarCard.title = isFocus ? '专注模式下无法查看重点语法及词汇' : '';
+      }
       const fab = $('genFab');
       if (fab) fab.style.display = hasContent ? 'none' : 'flex';
     }
@@ -4195,10 +4447,10 @@
         const answer = await callAPI(
           [{ role: 'user', content: `Context sentence from a ${lang} article (CEFR ${currentLevel}):\n"${tutorContext}"\n\nFull article:\n${articleContent.slice(0, 1200)}\n\nQuestion (answer in ${native}):\n${question}` }],
           `You are an expert ${lang} language tutor. Give clear, concise explanations in ${native}. Focus on the specific question. Use examples when helpful.`,
-          true, (_, f) => { resp.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 800, false, 'AI导师'
+          true, (_, f) => { resp.innerHTML = renderMd(f) + '<span class="streaming-indicator"></span>'; }, 800, false, 'AI导师'
         );
-        resp.innerHTML = esc(answer).replace(/\n/g, '<br>');
-      } catch(e) { resp.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
+        resp.innerHTML = renderMd(answer);
+      } catch (e) { resp.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
     }
 
     // ─── Rewrite panel ───
@@ -4257,7 +4509,7 @@
           true, (_, f) => { textBox.innerHTML = esc(f) + '<span class="streaming-indicator"></span>'; }, 400, false, '改写'
         );
         textBox.innerHTML = esc(result);
-      } catch(e) { textBox.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
+      } catch (e) { textBox.innerHTML = `<span style="color:var(--red)">${esc(e.message)}</span>`; }
     }
 
     // Apply focus mode on page load
